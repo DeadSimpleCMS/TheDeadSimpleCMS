@@ -1,6 +1,6 @@
 <?php
 /**
- * controller.php
+ * core.php
  *
  * Created By monstertke
  * Date: 3/7/13
@@ -22,27 +22,13 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+require 'configuration.php';
+require 'routes.php';
 
-class Controller {
-   public $load;
-   public $model;
-   public $database;
-   public $config;
-   public $routes;
+require 'load.php';
+require 'model.php';
+require 'database.php';
+require 'router.php';
 
-   function __construct()
-   {
-      $this->load       = new Load();
-      $this->model      = new Model();
-      $this->config     = new Configuration();
-      $this->routes     = new Routes();
-      $this->database   = new Database($this->config->getPgsql());
-
-      $this->parent_construct();
-   }
-
-    function parent_construct()
-    {
-      //Override
-    }
-}
+require 'controller.php';
+new Router();

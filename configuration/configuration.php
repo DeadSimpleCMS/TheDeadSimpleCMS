@@ -1,10 +1,10 @@
 <?php
 /**
- * controller.php
+ * configuration.php
  *
  * Created By monstertke
  * Date: 3/7/13
- * Time: 7:53 PM
+ * Time: 7:58 PM
  *
  * Copyright (c) 2013 monstertke
  *
@@ -22,27 +22,22 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+class Configuration
+{
+    public $pgsql = array(
+        'driver'   => 'pgsql',
+        'host'     => 'postgres.internal',
+        'database' => 'laravel',
+        'username' => 'laravel',
+        'password' => 'secure99',
+        'charset'  => 'utf8',
+        'prefix'   => '',
+        'schema'   => 'public',
+    );
 
-class Controller {
-   public $load;
-   public $model;
-   public $database;
-   public $config;
-   public $routes;
-
-   function __construct()
-   {
-      $this->load       = new Load();
-      $this->model      = new Model();
-      $this->config     = new Configuration();
-      $this->routes     = new Routes();
-      $this->database   = new Database($this->config->getPgsql());
-
-      $this->parent_construct();
-   }
-
-    function parent_construct()
+    public function getPgsql()
     {
-      //Override
+        return $this->pgsql;
     }
+
 }

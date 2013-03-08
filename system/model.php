@@ -1,6 +1,7 @@
 <?php
 
 class Model {
+
    public function user_info()
    {
       // simulates real data

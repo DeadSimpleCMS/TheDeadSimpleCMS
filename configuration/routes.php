@@ -1,10 +1,10 @@
 <?php
 /**
- * controller.php
+ * routes.php
  *
  * Created By monstertke
  * Date: 3/7/13
- * Time: 7:53 PM
+ * Time: 10:17 PM
  *
  * Copyright (c) 2013 monstertke
  *
@@ -22,27 +22,23 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+class Routes
+{
 
-class Controller {
-   public $load;
-   public $model;
-   public $database;
-   public $config;
-   public $routes;
+   private $routes = array(
+        'home' => array(
+            'home' => 'home/',
+        ),
+        'pages' => array(
+            'pages' => 'pages/',
+        ),
+        'about' => array(
+            'about' => 'about/',
+        ),
+    );
 
-   function __construct()
-   {
-      $this->load       = new Load();
-      $this->model      = new Model();
-      $this->config     = new Configuration();
-      $this->routes     = new Routes();
-      $this->database   = new Database($this->config->getPgsql());
-
-      $this->parent_construct();
-   }
-
-    function parent_construct()
+    function returnRoutes()
     {
-      //Override
+        return $this->routes;
     }
 }

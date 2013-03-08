@@ -1,10 +1,10 @@
 <?php
 /**
- * controller.php
+ * home_controller.php
  *
  * Created By monstertke
  * Date: 3/7/13
- * Time: 7:53 PM
+ * Time: 10:11 PM
  *
  * Copyright (c) 2013 monstertke
  *
@@ -22,27 +22,16 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-class Controller {
-   public $load;
-   public $model;
-   public $database;
-   public $config;
-   public $routes;
-
-   function __construct()
-   {
-      $this->load       = new Load();
-      $this->model      = new Model();
-      $this->config     = new Configuration();
-      $this->routes     = new Routes();
-      $this->database   = new Database($this->config->getPgsql());
-
-      $this->parent_construct();
-   }
-
+class Home_controller extends Controller
+{
     function parent_construct()
     {
-      //Override
+        $this->home();
+    }
+
+    function home()
+    {
+        $data = $this->model->user_info();
+        $this->load->view('someview.php', $data);
     }
 }

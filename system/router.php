@@ -1,10 +1,10 @@
 <?php
 /**
- * controller.php
+ * router.php
  *
  * Created By monstertke
  * Date: 3/7/13
- * Time: 7:53 PM
+ * Time: 7:38 PM
  *
  * Copyright (c) 2013 monstertke
  *
@@ -22,27 +22,48 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+class Router
+{
+    private $route;
 
-class Controller {
-   public $load;
-   public $model;
-   public $database;
-   public $config;
-   public $routes;
-
-   function __construct()
-   {
-      $this->load       = new Load();
-      $this->model      = new Model();
-      $this->config     = new Configuration();
-      $this->routes     = new Routes();
-      $this->database   = new Database($this->config->getPgsql());
-
-      $this->parent_construct();
-   }
-
-    function parent_construct()
+    function __construct()
     {
-      //Override
+        $this->route = $this->getURL();
+        //call matching extended class in this case home.
+        if($this->returnMethod($this->route))
+        {
+            $file = $this->returnMethod($this->route);
+            $class = $file . '_controller';
+            require_once $file . '_controller.php'; //TODO: This need to be handled by the loader class. and handle no matches on the method call.
+
+            new $class;
+
+        }
+        else
+        {
+            require_once "home_controller.php";
+            new Home_controller(); //TODO: This needs to be cleaned up.
+        }
+
+    }
+
+    function getURL()
+    {
+        $route = parse_url($_SERVER["REQUEST_URI"]);
+        $segments = explode('/', $route["path"]);
+        //var_dump($segments);
+        return $segments;
+    }
+
+    function returnMethod($r)
+    {
+        return $r[1];
+    }
+
+    function returnParams($r)
+    {
+        $arrayCount = array_shift($r);
+
+        return $r;
     }
 }
