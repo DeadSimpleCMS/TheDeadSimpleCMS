@@ -1,10 +1,10 @@
 <?php
 /**
- * core.php
+ * view.php
  *
  * Created By monstertke
- * Date: 3/7/13
- * Time: 7:53 PM
+ * Date: 3/9/13
+ * Time: 10:29 AM
  *
  * Copyright (c) 2013 monstertke
  *
@@ -22,16 +22,18 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-require 'configuration.php';
-require 'routes.php';
+class View
+{
+    public $smarty;
 
-require 'load.php';
-require 'database.php';
-require 'model.php';
-require 'router.php';
+    function __construct()
+    {
+        $path = $GLOBALS['sitePath'] . '/views/';
+        $this->smarty = new Smarty();
+        $this->smarty->setTemplateDir($path . 'templates');
+        $this->smarty->setCompileDir($path . 'templates_c');
+        $this->smarty->setConfigDir($path .'configs');
+        $this->smarty->setCacheDir($path . 'cache');
+    }
 
-require('Smarty.class.php');
-require 'view.php';
-
-require 'controller.php';
-new Router();
+}

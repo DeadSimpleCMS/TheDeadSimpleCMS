@@ -13,6 +13,9 @@ $paths = array(
     $sitePath . '/application',
     $sitePath . '/configuration',
     $sitePath . '/lib',
+    $sitePath . '/lib/Smarty/libs',
+    $sitePath . '/lib/Smarty/libs/plugins',
+    $sitePath . '/lib/Smarty/libs/sysplugins',
     get_include_path()
 );
 
