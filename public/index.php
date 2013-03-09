@@ -1,12 +1,17 @@
 <?php
 
+$publicPath = getcwd();
+chdir($_SERVER['DOCUMENT_ROOT'] . "/..");
+$sitePath = getcwd();
+chdir($publicPath);
+
 $paths = array(
-    '/usr/share/nginx/www' . '/application/views',
-    '/usr/share/nginx/www' . '/application/controllers',
-    '/usr/share/nginx/www' . '/system',
-    '/usr/share/nginx/www' . '/application',
-    '/usr/share/nginx/www' . '/configuration',
-    '/usr/share/nginx/www' . '/lib',
+    $sitePath . '/application/views',
+    $sitePath . '/application/controllers',
+    $sitePath . '/system',
+    $sitePath . '/application',
+    $sitePath . '/configuration',
+    $sitePath . '/lib',
     get_include_path()
 );
 

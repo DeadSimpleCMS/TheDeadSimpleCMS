@@ -45,4 +45,9 @@ class Controller {
     {
       //Override
     }
+
+    function testInheritance()
+    {
+        echo "this is an inherited method call";
+    }
 }

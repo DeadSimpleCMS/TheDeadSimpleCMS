@@ -10,13 +10,28 @@ class Load {
        include $file_name;
     }
 
-    function controller($file_name, $data = null)
+    function controller($file_name)
     {
-        if( is_array($data) )
+        $file = $file_name . "_controller.php";
+        $path = $GLOBALS["sitePath"] . '/application/controllers/';
+        try
         {
-            extract($data);
+            if(!file_exists($path . $file))
+            {
+                //throw new Exception("Sorry The file {$file} doesnt exist");
+                return false;
+            }
+            else
+            {
+                require_once $file;
+                return true;
+            }
         }
-        include $file_name;
+        catch(Exception $e)
+        {
+            echo $e;
+            echo $path . '/controllers/' . $file;
+        }
     }
 }
 

@@ -25,24 +25,35 @@
 class Router
 {
     private $route;
+    private $load;
 
     function __construct()
     {
         $this->route = $this->getURL();
+        $this->load  = new Load();
+
         //call matching extended class in this case home.
         if($this->returnMethod($this->route))
         {
             $file = $this->returnMethod($this->route);
             $class = $file . '_controller';
-            require_once $file . '_controller.php'; //TODO: This need to be handled by the loader class. and handle no matches on the method call.
 
-            new $class;
+            if($this->load->controller($file))
+            {
+                new $class;
+            }
+            else
+            {
+                $this->load->controller('error');
+                new Error_controller();
+            }
 
         }
         else
         {
-            require_once "home_controller.php";
-            new Home_controller(); //TODO: This needs to be cleaned up.
+            //require_once "home_controller.php";
+            $this->load->controller('home');
+            new Home_controller();
         }
 
     }

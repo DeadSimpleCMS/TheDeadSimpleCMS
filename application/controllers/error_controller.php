@@ -1,10 +1,10 @@
 <?php
 /**
- * home_controller.php
+ * error_controller.php
  *
  * Created By monstertke
- * Date: 3/7/13
- * Time: 10:11 PM
+ * Date: 3/8/13
+ * Time: 8:40 PM
  *
  * Copyright (c) 2013 monstertke
  *
@@ -22,16 +22,15 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-class Home_controller extends Controller
+class Error_controller extends Controller
 {
     function parent_construct()
     {
-        $this->index();
+        $this->error_404();
     }
 
-    function index()
+    function error_404()
     {
-        $data = $this->model->user_info();
-        $this->load->view('someview.php', $data);
+        $this->load->view('404.php');
     }
 }
