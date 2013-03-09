@@ -26,6 +26,10 @@ class Database
 {
     function __construct($db)
     {
-        //initialize db here.
+        require_once 'rb.php';
+        $v = $db->getPgsql();
+
+        R::setup("pgsql:host={$v["host"]};dbname={$v["database"]}","{$v["username"]}","{$v["password"]}");
+
     }
 }

@@ -36,7 +36,7 @@ class Controller {
       $this->model      = new Model();
       $this->config     = new Configuration();
       $this->routes     = new Routes();
-      $this->database   = new Database($this->config->getPgsql());
+      $this->database   = new Database($this->config);
 
       $this->parent_construct();
    }
