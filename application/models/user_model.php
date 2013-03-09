@@ -28,8 +28,9 @@ class User_model extends Model
     {
         // simulates real data
         return array(
-            'first' => 'James',
-            'last'  => 'Bulkowski'
+            'first'         => 'James',
+            'last'          => 'Bulkowski',
+            'page_title'    => 'Dead Simple CMS',
         );
 
     }

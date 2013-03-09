@@ -35,6 +35,8 @@ class Home_controller extends Controller
         $m = $this->load->model('user');
 
         $data = $m->user_info();
-        $this->load->view('someview.php', $data);
+
+        $this->load->view('home_index', $data);
+        new View();
     }
 }

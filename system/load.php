@@ -3,11 +3,13 @@
 class Load {
     function view( $file_name, $data = null )
     {
-       if( is_array($data) )
-       {
-           extract($data);
-       }
-       include $file_name;
+        $view = new View();
+        $smarty = $view->returnSmarty();
+
+        $template = $file_name . '.tpl';
+        $smarty->assign('data', $data);
+
+        $view->loadTemplate($template, $data);
     }
 
     function controller($file_name)

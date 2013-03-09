@@ -25,15 +25,26 @@
 class View
 {
     public $smarty;
+    private $path;
 
     function __construct()
     {
-        $path = $GLOBALS['sitePath'] . '/views/';
+        $this->path = $GLOBALS['sitePath'] . '/application/views/smart/';
         $this->smarty = new Smarty();
-        $this->smarty->setTemplateDir($path . 'templates');
-        $this->smarty->setCompileDir($path . 'templates_c');
-        $this->smarty->setConfigDir($path .'configs');
-        $this->smarty->setCacheDir($path . 'cache');
+        $this->smarty->setTemplateDir($this->path . 'templates/');
+        $this->smarty->setCompileDir($this->path . 'templates_c/');
+        $this->smarty->setConfigDir($this->path .'configs/');
+        $this->smarty->setCacheDir($this->path . 'cache/');
+        $this->smarty->debugging = true;
     }
 
+    function returnSmarty()
+    {
+        return $this->smarty;
+    }
+
+    function loadTemplate($template = null)
+    {
+        $this->smarty->display($template);
+    }
 }
