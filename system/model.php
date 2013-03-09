@@ -1,13 +1,10 @@
 <?php
 
-class Model {
+class Model extends Database
+{
+    function __construct()
+    {
+        parent::__construct();
+    }
 
-   public function user_info()
-   {
-      // simulates real data
-      return array(
-         'first' => 'James',
-         'last'  => 'Bulkowski'
-      );
-   }
 }

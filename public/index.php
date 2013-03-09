@@ -8,6 +8,7 @@ chdir($publicPath);
 $paths = array(
     $sitePath . '/application/views',
     $sitePath . '/application/controllers',
+    $sitePath . '/application/models',
     $sitePath . '/system',
     $sitePath . '/application',
     $sitePath . '/configuration',

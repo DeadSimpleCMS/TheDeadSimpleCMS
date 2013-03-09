@@ -33,6 +33,32 @@ class Load {
             echo $path . '/controllers/' . $file;
         }
     }
+
+    function model($file_name, $data = null)
+    {
+        $file = $file_name . "_model.php";
+        $path = $GLOBALS["sitePath"] . '/application/models/';
+        try
+        {
+            if(!file_exists($path . $file))
+            {
+                //throw new Exception("Sorry The file {$file} doesnt exist");
+                return false;
+            }
+            else
+            {
+                require_once $file;
+                $class = $file_name . '_model';
+
+                return new $class;
+            }
+        }
+        catch(Exception $e)
+        {
+            echo $e;
+            echo $path . '/models/' . $file;
+        }
+    }
 }
 
 

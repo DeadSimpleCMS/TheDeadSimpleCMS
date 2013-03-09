@@ -24,12 +24,46 @@
  */
 class Database
 {
-    function __construct($db)
+    private $config;
+    private $settings;
+    private $db;
+
+    function __construct()
     {
         require_once 'rb.php';
-        $v = $db->getPgsql();
+        $this->config = new Configuration();
+        $this->settings = $this->config->getSettings();
+
+        switch($this->settings['database'])
+        {
+            case 'postgres':
+                $this->db = $this->config->getPgsql();
+                break;
+            case 'mysql':
+                $this->db = $this->config->getMysql();
+                break;
+            case 'sqlite':
+                $this->db = $this->config->getSqlite();
+                break;
+            default:
+                echo "THere is a problem with your config file, please check the value of the \"database\" array value
+                in /configuration/configuration.php";
+
+        }
+
+        $v = $this->db;
 
         R::setup("pgsql:host={$v["host"]};dbname={$v["database"]}","{$v["username"]}","{$v["password"]}");
 
+        if($this->settings['sql_debug'])
+        {
+            R::debug(true);
+        }
     }
+
+    function listTables()
+    {
+        return R::$writer->getTables();
+    }
+
 }

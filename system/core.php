@@ -26,8 +26,8 @@ require 'configuration.php';
 require 'routes.php';
 
 require 'load.php';
-require 'model.php';
 require 'database.php';
+require 'model.php';
 require 'router.php';
 
 require 'controller.php';

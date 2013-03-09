@@ -24,6 +24,38 @@
  */
 class Configuration
 {
+    /*
+     * General configuration settings.
+     */
+    public $settings = array(
+        'database'              => 'postgres',  //Values are: postgres, mysql, or sqlite.
+        'base_url'              => '',          //The base URL og the installation.
+        'default_controller'    => 'home',      //Set to whatever the default controller name is.
+        'php_debug'             => false,       //Set this to true during installation and development.
+        'sql_debug'             => false,       //WARNING DO NOT SET TO TRUE IN PRODUCTION ENVIORNMENT.
+    );
+
+    /**
+     * Database connection settings.
+     */
+    public $sqlite = array(
+        'driver'   => 'sqlite',
+        'database' => '/database/deadsimple.txt',
+        'username' => 'laravel',
+        'password' => 'secure99',
+    );
+
+    public $mysql = array(
+        'driver'   => 'mysql',
+        'host'     => 'postgres.internal',
+        'database' => 'laravel',
+        'username' => 'laravel',
+        'password' => 'secure99',
+        'charset'  => 'utf8',
+        'prefix'   => '',
+        'schema'   => 'public',
+    );
+
     public $pgsql = array(
         'driver'   => 'pgsql',
         'host'     => 'postgres.internal',
@@ -34,6 +66,25 @@ class Configuration
         'prefix'   => '',
         'schema'   => 'public',
     );
+
+    /*
+     * DO NOT EDIT ANYTHING BELOW THIS POINT!!!
+     */
+
+    public function getSettings()
+    {
+        return $this->settings;
+    }
+
+    public function getSqlite()
+    {
+        return $this->sqlite;
+    }
+
+    public function getMysql()
+    {
+        return $this->mysql;
+    }
 
     public function getPgsql()
     {

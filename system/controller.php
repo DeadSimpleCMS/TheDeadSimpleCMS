@@ -23,28 +23,23 @@
  * SOFTWARE.
  */
 
-class Controller {
-   public $load;
-   public $model;
-   public $database;
-   public $config;
-   public $routes;
+class Controller
+{
+    public $config;
+    public $load;
+    public $model;
+    public $database;
+    public $routes;
 
    function __construct()
    {
-      $this->load       = new Load();
-      $this->model      = new Model();
-      $this->config     = new Configuration();
-      $this->routes     = new Routes();
-      $this->database   = new Database($this->config);
-
-      $this->parent_construct();
+        $this->config     = new Configuration();
+        $this->load       = new Load();
+        //$this->model      = new Model($this->config);
+        $this->routes     = new Routes();
+        //$this->database   = new Database($this->config);
    }
 
-    function parent_construct()
-    {
-      //Override
-    }
 
     function testInheritance()
     {

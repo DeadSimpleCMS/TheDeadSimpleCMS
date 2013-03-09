@@ -24,14 +24,17 @@
  */
 class Home_controller extends Controller
 {
-    function parent_construct()
+    function __construct()
     {
+        parent::__construct();
         $this->index();
     }
 
     function index()
     {
-        $data = $this->model->user_info();
+        $m = $this->load->model('user');
+
+        $data = $m->user_info();
         $this->load->view('someview.php', $data);
     }
 }

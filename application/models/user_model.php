@@ -1,10 +1,10 @@
 <?php
 /**
- * error_controller.php
+ * user_model.php
  *
  * Created By monstertke
  * Date: 3/8/13
- * Time: 8:40 PM
+ * Time: 10:22 PM
  *
  * Copyright (c) 2013 monstertke
  *
@@ -22,16 +22,15 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-class Error_controller extends Controller
+class User_model extends Model
 {
-    function __construct()
+    public function user_info()
     {
-        parent::__construct();
-        $this->error_404();
-    }
+        // simulates real data
+        return array(
+            'first' => 'James',
+            'last'  => 'Bulkowski'
+        );
 
-    function error_404()
-    {
-        $this->load->view('404.php');
     }
 }
