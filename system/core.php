@@ -34,4 +34,5 @@ require 'Smarty.class.php';
 require 'view.php';
 
 require 'controller.php';
+
 new Router();

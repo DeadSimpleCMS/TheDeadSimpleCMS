@@ -32,6 +32,12 @@ class Admin_controller extends Controller
 
     function index()
     {
-        echo "Admin/index";
+        $m = $this->load->model('user');
+
+        $data = $m->user_info();
+        $data['page_title'] = 'Administration';
+
+        $this->load->view('admin_index', $data);
+
     }
 }

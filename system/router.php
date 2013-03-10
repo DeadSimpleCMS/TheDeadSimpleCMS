@@ -24,7 +24,7 @@
  */
 class Router
 {
-    private $route;
+    public $route;
     private $load;
 
     function __construct()
@@ -71,10 +71,12 @@ class Router
         return $r[1];
     }
 
-    function returnParams($r)
+    function returnParams()
     {
+        $r = $this->route;
         $arrayCount = array_shift($r);
 
-        return $r;
+        return $r[1];
     }
+
 }

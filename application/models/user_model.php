@@ -30,7 +30,6 @@ class User_model extends Model
         return array(
             'first'         => 'James',
             'last'          => 'Bulkowski',
-            'page_title'    => 'Dead Simple CMS',
         );
 
     }

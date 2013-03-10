@@ -27,13 +27,12 @@ class Controller
 {
     public $config;
     public $load;
-    public $routes;
+    
 
    function __construct()
    {
         $this->config     = new Configuration();
         $this->load       = new Load();
-        $this->routes     = new Routes();
    }
 
 }
