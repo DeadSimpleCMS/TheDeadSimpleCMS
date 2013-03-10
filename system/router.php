@@ -24,7 +24,7 @@
  */
 class Router
 {
-    public $route;
+    public static $route;
     private $load;
 
     function __construct()

@@ -1,10 +1,10 @@
 <?php
 /**
- * controller.php
+ * factory.php
  *
  * Created By monstertke
- * Date: 3/7/13
- * Time: 7:53 PM
+ * Date: 3/9/13
+ * Time: 11:03 PM
  *
  * Copyright (c) 2013 monstertke
  *
@@ -22,18 +22,18 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-class Controller
+class Factory
 {
-    public $config;
-    public $load;
 
 
-   function __construct()
-   {
-        $this->config     = new Configuration();
-        $this->load       = new Load();
+    public function newRouter()
+    {
+        return new Router();
 
-   }
+    }
 
+    public function getRouter()
+    {
+        return self::$router;
+    }
 }

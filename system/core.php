@@ -26,6 +26,7 @@ require 'configuration.php';
 require 'routes.php';
 
 require 'load.php';
+require 'factory.php';
 require 'database.php';
 require 'model.php';
 require 'router.php';
@@ -35,4 +36,5 @@ require 'view.php';
 
 require 'controller.php';
 
-new Router();
+$factory = new Factory();
+$factory->newRouter();
