@@ -27,16 +27,22 @@ class Controller
 {
     public $config;
     public $load;
+    private $method;
+    private $global_data;
 
-
-   function __construct()
+   function __construct($gd)
    {
         $this->config     = new Configuration();
         $this->load       = new Load();
 
-       if(false)
+       $this->global_data = $gd;
+
+       $run_method = $this->global_data->getRunMethod();
+
+       if($run_method)
        {
-          //derp
+           //this is a horribly insecure hack.. TODO: Fix this horribly insecure hack.
+          $this->$run_method();
        }
        else
        {
@@ -44,4 +50,15 @@ class Controller
        }
 
    }
+
+    public function setMethod($method)
+    {
+        $this->method = $method;
+    }
+
+    public function getMethod()
+    {
+        return $this->method;
+    }
+
 }

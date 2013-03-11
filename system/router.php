@@ -26,26 +26,38 @@ class Router
 {
     public static $route;
     private $load;
+    private $global_data;
 
-    function __construct()
+    //This construct bootstraps the entire site, all core logic stems from this point.
+    function __construct($gd)
     {
+        //Get the current url as array
         $this->route = $this->getURL();
         $this->load  = new Load();
 
+        //Bring in the global data object.
+        $this->global_data = $gd;
+
         //call matching extended class in this case home.
-        if($this->returnMethod($this->route))
+        if($this->returnMethod())
         {
-            $file = $this->returnMethod($this->route);
+            $file = $this->returnMethod();
             $class = $file . '_controller';
 
+            //Set the requests class and method in the global_container.
+            $this->global_data->setLoadClass($this->returnMethod());
+            $this->global_data->setRunMethod($this->returnParams());
+
+            //returns true if it finds a matching class to load.
             if($this->load->controller($file))
             {
-                new $class;
+                //send over the Global_container object.
+                $c = new $class($this->global_data);
             }
             else
             {
                 $this->load->controller('error');
-                new Error_controller();
+                new Error_controller($this->global_data);
             }
 
         }
@@ -53,7 +65,7 @@ class Router
         {
             //require_once "home_controller.php";
             $this->load->controller('home');
-            new Home_controller();
+            new Home_controller($this->global_data);
         }
 
     }
@@ -66,17 +78,22 @@ class Router
         return $segments;
     }
 
-    function returnMethod($r)
+    function returnMethod()
     {
-        return $r[1];
+        return $this->route[1];
     }
 
     function returnParams()
     {
-        $r = $this->route;
-        $arrayCount = array_shift($r);
-
-        return $r[1];
+        //Suppress warning so it can return false;
+        if(@$this->route[2])
+        {
+            return $this->route[2];
+        }
+        else
+        {
+            return false;
+        }
     }
 
 }

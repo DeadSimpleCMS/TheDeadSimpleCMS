@@ -33,4 +33,9 @@ class Home_controller extends Controller
 
         $this->load->view('home_index', $data);
     }
+
+    function hello()
+    {
+     echo "hello";
+    }
 }

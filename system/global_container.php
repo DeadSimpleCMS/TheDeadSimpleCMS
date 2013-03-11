@@ -1,10 +1,10 @@
 <?php
 /**
- * core.php
+ * global_container.php
  *
  * Created By monstertke
- * Date: 3/7/13
- * Time: 7:53 PM
+ * Date: 3/10/13
+ * Time: 10:08 PM
  *
  * Copyright (c) 2013 monstertke
  *
@@ -22,21 +22,29 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-require 'configuration.php';
-require 'routes.php';
+class Global_container
+{
+    private $loadClass;
+    private $runMethod;
 
-require 'load.php';
-require 'global_container.php';
-require 'factory.php';
-require 'database.php';
-require 'model.php';
-require 'router.php';
+    public function setLoadClass($loadClass)
+    {
+        $this->loadClass = $loadClass;
+    }
 
-require 'Smarty.class.php';
-require 'view.php';
+    public function getLoadClass()
+    {
+        return $this->loadClass;
+    }
 
-require 'controller.php';
+    public function setRunMethod($runMethod)
+    {
+        $this->runMethod = $runMethod;
+    }
 
-$global_container = new Global_container();
-$factory = new Factory($global_container);
-$factory->newRouter();
+    public function getRunMethod()
+    {
+        return $this->runMethod;
+    }
+
+}
