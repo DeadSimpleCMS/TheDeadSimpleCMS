@@ -24,11 +24,6 @@
  */
 class Admin_controller extends Controller
 {
-    function __construct()
-    {
-        parent::__construct();
-        $this->index();
-    }
 
     function index()
     {

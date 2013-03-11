@@ -34,6 +34,14 @@ class Controller
         $this->config     = new Configuration();
         $this->load       = new Load();
 
-   }
+       if(false)
+       {
+          //derp
+       }
+       else
+       {
+        $this->index();
+       }
 
+   }
 }

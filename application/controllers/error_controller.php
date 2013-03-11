@@ -24,14 +24,9 @@
  */
 class Error_controller extends Controller
 {
-    function __construct()
-    {
-        parent::__construct();
-        $this->error_404();
-    }
 
-    function error_404()
+    function index()
     {
-        $this->load->view('404.php');
+        $this->load->view('error_index');
     }
 }
