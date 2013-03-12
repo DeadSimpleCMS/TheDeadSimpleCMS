@@ -35,7 +35,12 @@ class View
         $this->smarty->setCompileDir($this->path . 'templates_c/');
         $this->smarty->setConfigDir($this->path .'configs/');
         $this->smarty->setCacheDir($this->path . 'cache/');
-        $this->smarty->debugging = true;
+
+        //configuration/configuration.php $settings['view_debug']
+        if($GLOBALS['conf']->settings['view_debug'])
+        {
+            $this->smarty->debugging = true;
+        }
     }
 
     function returnSmarty()

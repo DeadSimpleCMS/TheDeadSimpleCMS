@@ -27,24 +27,12 @@ class Controller
 {
     public $config;
     public $load;
-    private $method;
 
    function __construct()
    {
         $this->config     = new Configuration();
         $this->load       = new Load();
-        echo "construct called";
 
    }
-
-    public function setMethod($method)
-    {
-        $this->method = $method;
-    }
-
-    public function getMethod()
-    {
-        return $this->method;
-    }
 
 }

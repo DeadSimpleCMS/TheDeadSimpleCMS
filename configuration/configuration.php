@@ -32,20 +32,21 @@ class Configuration
         'base_url'              => '',          //The base URL og the installation.
         'default_controller'    => 'home',      //Set to whatever the default controller name is.
         'php_debug'             => false,       //Set this to true during installation and development.
+        'view_debug'            => true,       //WARNING DO NOT SET TO TRUE IN PRODUCTION ENVIORNMENT.
         'sql_debug'             => false,       //WARNING DO NOT SET TO TRUE IN PRODUCTION ENVIORNMENT.
     );
 
     /**
      * Database connection settings.
      */
-    public $sqlite = array(
+    private $sqlite = array(
         'driver'   => 'sqlite',
         'database' => '/database/deadsimple.txt',
         'username' => 'laravel',
         'password' => 'secure99',
     );
 
-    public $mysql = array(
+    private $mysql = array(
         'driver'   => 'mysql',
         'host'     => 'postgres.internal',
         'database' => 'laravel',
@@ -56,7 +57,7 @@ class Configuration
         'schema'   => 'public',
     );
 
-    public $pgsql = array(
+    private $pgsql = array(
         'driver'   => 'pgsql',
         'host'     => 'postgres.internal',
         'database' => 'laravel',

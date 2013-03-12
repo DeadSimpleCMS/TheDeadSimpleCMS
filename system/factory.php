@@ -28,6 +28,10 @@ class Factory
     public function newRouter()
     {
         return new Router();
+    }
 
+    public function newConfig()
+    {
+        return new Configuration();
     }
 }

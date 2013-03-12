@@ -25,6 +25,7 @@
 class Router
 {
     public static $route;
+
     private $load;
 
     //This construct bootstraps the entire site, all core logic stems from this point.

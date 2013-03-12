@@ -23,7 +23,6 @@
  * SOFTWARE.
  */
 require 'configuration.php';
-require 'routes.php';
 
 require 'load.php';
 require 'factory.php';
@@ -36,5 +35,9 @@ require 'view.php';
 
 require 'controller.php';
 
+
 $factory = new Factory();
+$conf = $factory->newConfig();
 $factory->newRouter();
+
+
