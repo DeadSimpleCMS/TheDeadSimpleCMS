@@ -24,16 +24,10 @@
  */
 class Factory
 {
-    public $global_data;
-
-    function __construct($gd)
-    {
-        $this->global_data = $gd;
-    }
 
     public function newRouter()
     {
-        return new Router($this->global_data);
+        return new Router();
 
     }
 }

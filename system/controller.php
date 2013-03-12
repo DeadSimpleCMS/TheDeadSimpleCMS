@@ -28,26 +28,12 @@ class Controller
     public $config;
     public $load;
     private $method;
-    private $global_data;
 
-   function __construct($gd)
+   function __construct()
    {
         $this->config     = new Configuration();
         $this->load       = new Load();
-
-       $this->global_data = $gd;
-
-       $run_method = $this->global_data->getRunMethod();
-
-       if($run_method)
-       {
-           //this is a horribly insecure hack.. TODO: Fix this horribly insecure hack.
-          $this->$run_method();
-       }
-       else
-       {
-        $this->index();
-       }
+        echo "construct called";
 
    }
 

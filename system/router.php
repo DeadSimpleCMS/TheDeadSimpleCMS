@@ -26,48 +26,15 @@ class Router
 {
     public static $route;
     private $load;
-    private $global_data;
 
     //This construct bootstraps the entire site, all core logic stems from this point.
-    function __construct($gd)
+    function __construct()
     {
         //Get the current url as array
         $this->route = $this->getURL();
         $this->load  = new Load();
 
-        //Bring in the global data object.
-        $this->global_data = $gd;
-
-        //call matching extended class in this case home.
-        if($this->returnMethod())
-        {
-            $file = $this->returnMethod();
-            $class = $file . '_controller';
-
-            //Set the requests class and method in the global_container.
-            $this->global_data->setLoadClass($this->returnMethod());
-            $this->global_data->setRunMethod($this->returnParams());
-
-            //returns true if it finds a matching class to load.
-            if($this->load->controller($file))
-            {
-                //send over the Global_container object.
-                $c = new $class($this->global_data);
-            }
-            else
-            {
-                $this->load->controller('error');
-                new Error_controller($this->global_data);
-            }
-
-        }
-        else
-        {
-            //require_once "home_controller.php";
-            $this->load->controller('home');
-            new Home_controller($this->global_data);
-        }
-
+        $this->buildRoute();
     }
 
     function getURL()
@@ -93,6 +60,43 @@ class Router
         else
         {
             return false;
+        }
+    }
+
+    function buildRoute()
+    {
+        if($this->returnMethod())
+        {
+            $file = $this->returnMethod();
+            $class = $file . '_controller';
+
+            //returns true if it finds a matching class to load.
+            if($this->load->controller($file))
+            {
+                $c = new $class();
+
+                if($this->returnParams())
+                {
+                    call_user_func( array( $c, $this->returnParams() ) );
+                }
+                else
+                {
+                    call_user_func( array( $c, 'index' ) );
+                }
+            }
+            else
+            {
+                $this->load->controller('error');
+                $c = new Error_controller();
+                call_user_func( array( $c, 'index' ) );
+            }
+
+        }
+        else
+        {
+            $this->load->controller('home');
+            $c = new Home_controller();
+            call_user_func( array( $c, 'index' ) );
         }
     }
 
