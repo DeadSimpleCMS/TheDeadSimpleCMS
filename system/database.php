@@ -34,26 +34,34 @@ class Database
         $this->config = new Configuration();
         $this->settings = $this->config->getSettings();
 
+
         switch($this->settings['database'])
         {
             case 'postgres':
-                $this->db = $this->config->getPgsql();
+                $v = $this->db = $this->config->getPgsql();
+                R::setup("pgsql:host={$v["host"]};dbname={$v["database"]}","{$v["username"]}","{$v["password"]}");
                 break;
             case 'mysql':
-                $this->db = $this->config->getMysql();
+                $v = $this->db = $this->config->getMysql();
+                R::setup("mysql:host={$v["host"]};dbname={$v["database"]}","{$v["username"]}","{$v["password"]}");
                 break;
             case 'sqlite':
-                $this->db = $this->config->getSqlite();
+                $v = $this->db = $this->config->getSqlite();
+                R::setup("sqlite:{$v["database"]}","{$v["username"]}","{$v["password"]}");
                 break;
             default:
                 echo "THere is a problem with your config file, please check the value of the \"database\" array value
                 in /configuration/configuration.php";
-
         }
 
-        $v = $this->db;
 
-        R::setup("pgsql:host={$v["host"]};dbname={$v["database"]}","{$v["username"]}","{$v["password"]}");
+
+
+
+
+
+
+
 
         if($this->settings['sql_debug'])
         {

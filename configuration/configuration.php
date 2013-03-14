@@ -28,7 +28,7 @@ class Configuration
      * General configuration settings.
      */
     public $settings = array(
-        'database'              => 'postgres',  //Values are: postgres, mysql, or sqlite.
+        'database'              => 'sqlite',  //Values are: postgres, mysql, or sqlite.
         'base_url'              => '',          //The base URL og the installation.
         'default_controller'    => 'home',      //Set to whatever the default controller name is.
         'php_debug'             => false,       //Set this to true during installation and development.
@@ -39,6 +39,7 @@ class Configuration
     /**
      * Database connection settings.
      */
+
     private $sqlite = array(
         'driver'   => 'sqlite',
         'database' => '/database/deadsimple.txt',
@@ -72,6 +73,11 @@ class Configuration
      * DO NOT EDIT ANYTHING BELOW THIS POINT!!!
      */
 
+    function __construct()
+    {
+        $this->sqlite['database'] = $GLOBALS['sitePath'] . '/database/deadsimple.txt' ;
+
+    }
     public function getSettings()
     {
         return $this->settings;
