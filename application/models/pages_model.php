@@ -25,5 +25,10 @@
 
 class Pages_model extends Model
 {
+    function getLatestPage()
+    {
+        $page = R::load('pages', 11);
 
+        return $page;
+    }
 }

@@ -1,12 +1,5 @@
-<!DOCTYPE html>
 
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>{$data['page_title']}</title>
-</head>
-<body>
 <h1> Admin/Index </h1>
 {$data['first']} {$data['last']}
-</body>
-</html>
+<h3>{$data['pages']->content}</h3>
+

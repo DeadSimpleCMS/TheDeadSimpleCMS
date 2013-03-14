@@ -28,11 +28,15 @@ class Admin_controller extends Controller
     function index()
     {
         $m = $this->load->model('user');
+        $n = $this->load->model('pages');
 
         $data = $m->user_info();
+        $data['pages'] = $n->getLatestPage();
         $data['page_title'] = 'Administration';
 
+        $this->load->view('base/header', $data);
         $this->load->view('admin_index', $data);
+        $this->load->view('base/footer', $data);
 
     }
 }
