@@ -25,9 +25,9 @@
 
 class Pages_model extends Model
 {
-    function getLatestPage()
+    function getLatestPage($id)
     {
-        $page = R::load('pages', 11);
+        $page = R::load('pages', $id);
 
         return $page;
     }

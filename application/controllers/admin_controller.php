@@ -31,7 +31,7 @@ class Admin_controller extends Controller
         $n = $this->load->model('pages');
 
         $data = $m->user_info();
-        $data['pages'] = $n->getLatestPage();
+        $data['pages'] = $n->getLatestPage(13);
         $data['page_title'] = 'Administration';
 
         $this->load->view('base/header', $data);

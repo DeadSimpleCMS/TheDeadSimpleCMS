@@ -29,14 +29,60 @@ class Installer_model extends Model
     {
         $pages = R::dispense('pages');
 
-        $pages->content ="";
-        $pages->position ="";
-        $pages->owner ="";
-        $pages->published ="";
-        $pages->created = "";
+        $pages->content ="Welcome to DeadSimpleCMS!";
+        $pages->position ="1";
+        $pages->owner ="1";
+        $pages->published ="1";
+        $pages->created = R::isoDateTime();
+        $pages->modified = R::isoDateTime();
 
         R::store($pages);
 
     }
 
+    function install_links()
+    {
+        $links = R::dispense('links');
+        $links->url = '/';
+        $links->linkName = 'home';
+        $links->owner = "1";
+    }
+
+    function install_siteData($data)
+    {
+        $site = R::load("site", 1);
+        $site->name = $data["siteName"];
+        $site->baseurl = $data["baseUrl"];
+        $site->created = R::isoDateTime();
+        $site->modified = R::isoDateTime();
+
+        R::store($site);
+    }
+
+    function memory()
+    {
+        $memcache = new Memcache;
+        $memcache->connect('127.0.0.1', 11211) or die ("Could not connect");
+
+        $version = $memcache->getVersion();
+        echo "Server's version: ".$version."<br/>\n";
+
+        $tmp_object = new stdClass;
+        $tmp_object->str_attr = 'test';
+        $tmp_object->int_attr = 123;
+
+        $memcache->set('key', $tmp_object, false, 10) or die ("Failed to save data at the server");
+        echo "Store data in the cache (data will expire in 10 seconds)<br/>\n";
+
+        $get_result = $memcache->get('key');
+        echo "Data from the cache:<br/>\n";
+
+        var_dump($get_result);
+
+    }
+
+    function info()
+    {
+        phpinfo();
+    }
 }

@@ -1,5 +1,3 @@
 
-<h1> Admin/Index </h1>
-{$data['first']} {$data['last']}
-<h3>{$data['pages']->content}</h3>
+<h1>{$data['pages']->content}</h1>
 

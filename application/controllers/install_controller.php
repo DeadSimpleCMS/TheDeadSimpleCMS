@@ -28,8 +28,29 @@ class Install_controller extends Controller
     function index()
     {
         $m = $this->load->model('installer');
-        $m->install_pages();
+        $data['page_title'] = 'Installer';
 
-        echo $m->listTables();
+        $this->load->view("base/header", $data);
+        $this->load->view("install_index");
+        $this->load->view("base/footer");
+
+        if($_POST)
+        {
+            $format = array('format' => VALIDATE_NUM . VALIDATE_SPACE . VALIDATE_ALPHA_UPPER . VALIDATE_ALPHA_LOWER . VALIDATE_PUNCTUATION);
+            //TODO:Move this crap into a class or find a better library.
+            if(Validate::string($_POST['siteName'], $format)
+                && Validate::string($_POST['baseUrl'], $format))
+            {
+                $m->install_siteData($_POST);
+            }
+            else
+            {
+                echo "error";
+            }
+            var_dump($_POST);
+        }
+
+        //$m->install_pages();
+        //echo $m->listTables();
     }
 }

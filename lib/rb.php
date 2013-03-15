@@ -44,10 +44,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 RedBeanPHP is Written by Gabor de Mooij (G.J.G.T de Mooij) Copyright (c) 2011.
 
 
-GPLv2 LICENSE
+GPLv2 Validate-0.8.5_LICENSE
 
 
-        GNU GENERAL PUBLIC LICENSE
+        GNU GENERAL PUBLIC Validate-0.8.5_LICENSE
            Version 2, June 1991
 
  Copyright (C) 1989, 1991 Free Software Foundation, Inc.
@@ -105,7 +105,7 @@ patent must be licensed for everyone's free use or not licensed at all.
   The precise terms and conditions for copying, distribution and
 modification follow.
 
-        GNU GENERAL PUBLIC LICENSE
+        GNU GENERAL PUBLIC Validate-0.8.5_LICENSE
    TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
 
   0. This License applies to any program or other work which contains
