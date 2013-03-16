@@ -1,7 +1,7 @@
 <?php
 
 $publicPath = getcwd();
-chdir($_SERVER['DOCUMENT_ROOT'] . "/..");
+chdir(__DIR__ . "/..");
 $sitePath = getcwd();
 chdir($publicPath);
 
