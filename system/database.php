@@ -24,44 +24,34 @@
  */
 class Database
 {
-    private $config;
     private $settings;
     private $db;
 
     function __construct()
     {
         require_once 'rb.php';
-        $this->config = new Configuration();
-        $this->settings = $this->config->getSettings();
+        $loader         = new Load();
+        $this->settings = $loader->config('settings');
+        $this->db       = $loader->config('database');
 
-
-        switch($this->settings['database'])
+        switch($this->db['driver'])
         {
-            case 'postgres':
-                $v = $this->db = $this->config->getPgsql();
+            case 'pgsql':
+                $v = $this->db;
                 R::setup("pgsql:host={$v["host"]};dbname={$v["database"]}","{$v["username"]}","{$v["password"]}");
                 break;
             case 'mysql':
-                $v = $this->db = $this->config->getMysql();
+                $v = $this->db;
                 R::setup("mysql:host={$v["host"]};dbname={$v["database"]}","{$v["username"]}","{$v["password"]}");
                 break;
             case 'sqlite':
-                $v = $this->db = $this->config->getSqlite();
+                $v = $this->db;
                 R::setup("sqlite:{$v["database"]}","{$v["username"]}","{$v["password"]}");
                 break;
             default:
                 echo "THere is a problem with your config file, please check the value of the \"database\" array value
                 in /configuration/configuration.php";
         }
-
-
-
-
-
-
-
-
-
 
         if($this->settings['sql_debug'])
         {

@@ -41,10 +41,6 @@ class Router
     function getURL()
     {
         $route = parse_url($_SERVER["REQUEST_URI"]);
-        foreach($route as $v)
-        {
-            echo $v;
-        }
         $segments = explode('/', $route["path"]);
         //var_dump($segments);
         return $segments;

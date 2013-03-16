@@ -2,6 +2,13 @@
 
 class Load {
 
+    function config($file_name)
+    {
+        $file = $file_name . '_conf.php';
+        require($file);
+        return $$file_name;
+    }
+
     function view( $file_name, $data = null )
     {
         $view = new View();
