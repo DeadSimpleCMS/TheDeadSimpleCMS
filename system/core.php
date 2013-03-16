@@ -30,6 +30,7 @@ require 'database.php';
 require 'model.php';
 require 'router.php';
 require 'Validate.php';
+require 'validator.php';
 
 require 'Smarty.class.php';
 require 'view.php';

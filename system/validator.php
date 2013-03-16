@@ -1,10 +1,10 @@
 <?php
 /**
- * install_controller.php
+ * validator.php
  *
  * Created By monstertke
- * Date: 3/12/13
- * Time: 8:18 PM
+ * Date: 3/15/13
+ * Time: 2:57 PM
  *
  * Copyright (c) 2013 monstertke
  *
@@ -23,47 +23,47 @@
  * SOFTWARE.
  */
 
-class Install_controller extends Controller
+class Validator
 {
-    function index()
+    function string($string, $rules, $min_limit = 0, $max_limit = 0 )
     {
-        $m = $this->load->model('installer');
-        $data['page_title'] = 'Installer';
-
-
-        if($_POST)
+        if(Validate::string($string, array( 'format'     => $this->return_rules($rules),
+                                            'min_length' => $min_limit,
+                                            'max_length' => $max_limit)))
         {
-            $v = new Validator();
-            //TODO:Move this crap into a class or find a better library.
-            if($v->string($_POST['siteName'], 'alpha|punctuation|space') && $v->string($_POST['baseUrl'], 'alpha|punctuation'))
-            {
-                $m->install_siteData($_POST);
-            }
-            else
-            {
-                echo "error";
-            }
-        }
-
-        $data['install'] = $m->siteData();
-        $this->load->view("base/header", $data);
-        $this->load->view("install_index",$data);
-        $this->load->view("base/footer",$data);
-        //$m->install_pages();
-        //echo $m->listTables();
-    }
-
-    function test()
-    {
-        $v = new Validator();
-
-        if($v->string("99445345678",'numbers|space'))
-        {
-            echo 'validates';
+            return true;
         }
         else
         {
-            echo 'fails validation';
+            return false;
         }
+
+    }
+
+    function return_rules($r)
+    {
+        $expand = explode('|', $r);
+        $return_rules = array();
+
+        $rules = array(
+            'alpha'         => VALIDATE_ALPHA,
+            'punctuation'   => VALIDATE_PUNCTUATION,
+            'numbers'       => VALIDATE_NUM,
+            'space'         => VALIDATE_SPACE,
+            'upper'         => VALIDATE_ALPHA_UPPER,
+            'lower'         => VALIDATE_ALPHA_LOWER,
+            'name'          => VALIDATE_NAME,
+            'street'        => VALIDATE_STREET,
+        );
+
+        foreach($expand as $v)
+        {
+            if (array_key_exists($v, $rules))
+            {
+                array_push($return_rules, $rules[$v]);
+            }
+
+        }
+        return implode(' . ' , $return_rules);
     }
 }
