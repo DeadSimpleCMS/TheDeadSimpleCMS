@@ -30,7 +30,7 @@ class Database
     function __construct()
     {
         require_once 'rb.php';
-        $loader         = new Load();
+        $loader         = Load::getInstance();
         $this->settings = $loader->config('settings');
         $this->db       = $loader->config('database');
 

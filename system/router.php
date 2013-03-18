@@ -33,7 +33,7 @@ class Router
     {
         //Get the current url as array
         $this->route = $this->getURL();
-        $this->load  = new Load();
+        $this->load  = Load::getInstance();
 
         $this->buildRoute();
     }

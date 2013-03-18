@@ -27,11 +27,7 @@ class Home_controller extends Controller
     function index()
     {
         $m = $this->load->model('user');
-        $n = $this->load->config('settings');
-        $o = $this->load->config('database');
 
-        var_dump($n);
-        var_dump($o);
         $data = $m->user_info();
         $data['page_title'] = 'Dead Simple CMS';
 

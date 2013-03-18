@@ -25,6 +25,16 @@
 
 class Install_controller extends Controller
 {
+    function __construct()
+    {
+        parent::__construct();
+
+        $this->checkFiles('templates_c');
+        $this->checkFiles('templates');
+        $this->checkFiles('config');
+        $this->checkFiles('cache');
+    }
+
     function index()
     {
         $m = $this->load->model('installer');
@@ -53,17 +63,42 @@ class Install_controller extends Controller
         //echo $m->listTables();
     }
 
-    function test()
+    private function checkFiles($file)
     {
-        $v = new Validator();
-
-        if($v->string("99445345678",'numbers|space'))
+        $checkPath = $GLOBALS['sitePath'] . '/application/views/smart/';
+        if (!is_writable($v = $checkPath . $file))
         {
-            echo 'validates';
+            echo $v .' is not writable or does not exist. ';
+            echo '<br />';
+            if (file_exists($v))
+            {
+                echo 'Directory permissions are currently ' . substr(sprintf('%o', fileperms($v)), -4) .
+                     " they should be 0770 or 0777.";
+                echo '<br />';
+                echo 'To correct this error, from the command line enter...';
+                echo '<br />';
+                echo ' chmod 777 ' . $v;
+            }
+            return false;
         }
         else
         {
-            echo 'fails validation';
+            if (!is_readable($v))
+            {
+                echo $v . ' is not readable. ';
+                echo '<br />';
+                if (file_exists($v))
+                {
+                    echo 'Directory permissions are currently ' . substr(sprintf('%o', fileperms($v)), -4) .
+                        " they should be 0770 or 0777.";
+                    echo '<br />';
+                    echo 'To correct this error, from the command line enter...';
+                    echo '<br />';
+                    echo ' chmod 777 ' . $v;
+                }
+                return false;
+            }
+            return true;
         }
     }
 }

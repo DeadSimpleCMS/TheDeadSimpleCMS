@@ -30,9 +30,7 @@ class Controller
 
    function __construct()
    {
-        $this->config     = new Configuration();
-        $this->load       = new Load();
-
+        $this->load = Load::getInstance();
    }
 
 }

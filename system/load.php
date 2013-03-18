@@ -2,6 +2,18 @@
 
 class Load {
 
+    private static $instance;
+
+    public static function getInstance()
+    {
+        if (!isset(self::$instance))
+        {
+            $class = __CLASS__;
+            self::$instance = new $class();
+        }
+        return self::$instance;
+    }
+
     function config($file_name)
     {
         $file = $file_name . '_conf.php';

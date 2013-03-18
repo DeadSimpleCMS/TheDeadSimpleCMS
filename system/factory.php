@@ -24,14 +24,13 @@
  */
 class Factory
 {
+    private $router;
 
     public function newRouter()
     {
-        return new Router();
+        $this->router = new Router();
+        return $this->router;
     }
 
-    public function newConfig()
-    {
-        return new Configuration();
-    }
+
 }

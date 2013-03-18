@@ -26,6 +26,7 @@ class View
 {
     public $smarty;
     private $path;
+    private $settings;
 
     function __construct()
     {
@@ -35,9 +36,11 @@ class View
         $this->smarty->setCompileDir($this->path . 'templates_c/');
         $this->smarty->setConfigDir($this->path .'configs/');
         $this->smarty->setCacheDir($this->path . 'cache/');
+        $this->settings = Load::getInstance();
+        $this->settings = $this->settings->config('settings');
 
         //configuration/configuration.php $settings['view_debug']
-        if($GLOBALS['conf']->settings['view_debug'])
+        if($this->settings['view_debug'])
         {
             $this->smarty->debugging = true;
         }
