@@ -38,13 +38,12 @@ class Install_controller extends Controller
     function index()
     {
         $m = $this->load->model('installer');
+        $l = $this->load->model('links');
         $data['page_title'] = 'Installer';
 
-
-        if($_POST)
+        if(@$_POST['submitBase'])
         {
             $v = new Validator();
-            //TODO:Move this crap into a class or find a better library.
             if($v->string($_POST['siteName'], 'alpha|punctuation|space') && $v->string($_POST['baseUrl'], 'alpha|punctuation'))
             {
                 $m->install_siteData($_POST);
@@ -54,8 +53,13 @@ class Install_controller extends Controller
                 echo "error";
             }
         }
+        if(@$_POST['submitLinks'])
+        {
+            $m->install_links($_POST);
+        }
 
         $data['install'] = $m->siteData();
+        $data['navLinks'] = $l->getNavbarLinks();
         $this->load->view("base/header", $data);
         $this->load->view("install_index",$data);
         $this->load->view("base/footer",$data);

@@ -31,7 +31,9 @@ class Home_controller extends Controller
         $data = $m->user_info();
         $data['page_title'] = 'Dead Simple CMS';
 
+        $this->load->view('base/header', $data);
         $this->load->view('home_index', $data);
+        $this->load->view('base/footer', $data);
     }
 
     function hello()

@@ -40,12 +40,18 @@ class Installer_model extends Model
 
     }
 
-    function install_links()
+    function install_links($data)
     {
         $links = R::dispense('links');
-        $links->url = '/';
-        $links->linkName = 'home';
-        $links->owner = "1";
+        $links->url = $data['url'];
+        $links->linkName = $data['linkName'];
+        $links->order = $data['linkOrder'];
+        $links->location = '1'; //1 == navbar
+        $links->owner = '1';
+        $links->created = R::isoDateTime();
+        $links->modified = R::isoDateTime();
+
+        R::store($links);
     }
 
     function install_siteData($data)
