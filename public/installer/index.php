@@ -1,10 +1,10 @@
 <?php
 /**
- * settings_conf.php
+ * index.php
  *
  * Created By monstertke
- * Date: 3/16/13
- * Time: 12:19 PM
+ * Date: 3/18/13
+ * Time: 4:07 PM
  *
  * Copyright (c) 2013 monstertke
  *
@@ -23,8 +23,9 @@
  * SOFTWARE.
  */
 
-$settings['base_url']           = 'http://nginx.internal/';
-$settings['default_controller'] = 'home';       //Set to whatever the default controller name is.
-$settings['php_debug']          = false;        //Set this to true during installation and development.
-$settings['view_debug']         = true;         //WARNING DO NOT SET TO TRUE IN PRODUCTION ENVIORNMENT.
-$settings['sql_debug']          = false;        //This either...
+require 'load.php';
+require 'install_system.php';
+require 'database.php';
+require 'install_database.php';
+
+new Install_system();

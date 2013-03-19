@@ -61,7 +61,12 @@ class Database
 
     function listTables()
     {
-        return R::$writer->getTables();
+        $db = R::$writer->getTables();
+        echo '<br>';
+        foreach($db as $k => $v)
+        {
+            echo 'Table ' . '"'. $v . '"'. ' loaded and initialized.' .'<br>';
+        }
     }
 
 }

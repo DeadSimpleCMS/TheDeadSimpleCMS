@@ -1,10 +1,10 @@
 <?php
 /**
- * install_controller.php
+ * install_system.php
  *
  * Created By monstertke
- * Date: 3/12/13
- * Time: 8:18 PM
+ * Date: 3/18/13
+ * Time: 4:11 PM
  *
  * Copyright (c) 2013 monstertke
  *
@@ -23,58 +23,36 @@
  * SOFTWARE.
  */
 
-class Install_controller extends Controller
+class Install_system
 {
+    public $load;
+    public $db;
     function __construct()
     {
-        parent::__construct();
-
-        $this->checkFiles('templates_c');
-        $this->checkFiles('templates');
-        $this->checkFiles('config');
-        $this->checkFiles('cache');
-    }
-
-    function index()
-    {
-        $m = $this->load->model('installer');
-        $l = $this->load->model('links');
-        $data['page_title'] = 'Installer';
-
-        if(isset($_POST['submitBase']))
+        $this->load = Load::getInstance();
+        echo "Welcome to the DeadSimpleCMS system installer." . '<br>';
+        if($this->checkFileChecker())
         {
-            $v = new Validator();
-            if($v->string($_POST['siteName'], 'alpha|punctuation|space') && $v->string($_POST['baseUrl'], 'alpha|punctuation'))
+            $this->db = new Install_database();
+            if(!$this->db->installDataExists())
             {
-                $m->install_siteData($_POST);
+                if($this->db->install_links() && $this->db->install_siteData() && $this->db->install_pages())
+                {
+                    $this->db->listTables();
+                }
+                echo "Database defaults installed.";
             }
             else
             {
-                echo "error";
+                echo 'Database Defaults already installed, please proceed to yoursite.com/admin';
             }
         }
-        if(isset($_POST['submitLinks']))
-        {
-            $m->install_links($_POST);
-        }
 
-        $data['install'] = $m->siteData();
-        $data['navLinks'] = $l->getNavbarLinks();
-        $this->load->view("base/header", $data);
-        $this->load->view("install_index",$data);
-        $this->load->view("base/footer",$data);
-        //$m->install_pages();
-        //echo $m->listTables();
     }
 
-    function linksTest()
-    {
-        $m = $this->load->model('installer');
-        $m->install_links();
-    }
     private function checkFiles($file)
     {
-        $checkPath = $GLOBALS['sitePath'] . '/application/views/smart/';
+        $checkPath = $GLOBALS['sitePath'];
         if (!is_writable($v = $checkPath . $file))
         {
             echo $v .' is not writable or does not exist. ';
@@ -82,7 +60,7 @@ class Install_controller extends Controller
             if (file_exists($v))
             {
                 echo 'Directory permissions are currently ' . substr(sprintf('%o', fileperms($v)), -4) .
-                     " they should be 0770 or 0777.";
+                    " they should be 0770 or 0777.";
                 echo '<br />';
                 echo 'To correct this error, from the command line enter...';
                 echo '<br />';
@@ -107,7 +85,29 @@ class Install_controller extends Controller
                 }
                 return false;
             }
+            echo '<pre>' . $v . ' --- Is readable and writable by the web server user.</pre>' .'<br>';
             return true;
+        }
+    }
+
+    function checkFileChecker() //Lol
+    {
+        if($this->checkFiles('/application/views/smart/templates_c') &&
+            $this->checkFiles('/application/views/smart/templates') &&
+            $this->checkFiles('/application/views/smart/config') &&
+            $this->checkFiles('/application/views/smart/cache') &&
+            $this->checkFiles('/database'))
+        {
+            echo "System directories seem to be in order." . '<br>';
+            return true;
+        }
+        else
+        {
+            echo "Sorry, there has been an unexpected error." . '<br>';
+            echo "Please ensure that all system files are in the correct locations." . '<br>';
+            echo "If this error persists please open an issue on..";
+            echo "<a href=\"https://github.com/DeadSimpleCMS/TheDeadSimpleCMS/issues\">Github</a>";
+            return false;
         }
     }
 }

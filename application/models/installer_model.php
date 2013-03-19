@@ -40,18 +40,49 @@ class Installer_model extends Model
 
     }
 
-    function install_links($data)
+    function install_links()
     {
-        $links = R::dispense('links');
-        $links->url = $data['url'];
-        $links->linkName = $data['linkName'];
-        $links->order = $data['linkOrder'];
-        $links->location = '1'; //1 == navbar
-        $links->owner = '1';
-        $links->created = R::isoDateTime();
-        $links->modified = R::isoDateTime();
+        $linkData = array(
+            0 => array(
+                'url'       => '/home',
+                'linkname'  => 'Home',
+                'order'     => '1',
+                'location'  => '1',
+                'owner'     => '1',
 
-        R::store($links);
+            ),
+            1 => array(
+                'url'       => '/admin',
+                'linkname'  => 'Admin',
+                'order'     => '2',
+                'location'  => '1',
+                'owner'     => '1',
+
+            ),
+            2 => array(
+                'url'       => '/install',
+                'linkname'  => 'Install',
+                'order'     => '3',
+                'location'  => '1',
+                'owner'     => '1',
+
+            ),
+        );
+
+        foreach($linkData as $k)
+        {
+            $links = R::dispense('links');
+            $links->url = $k['url'];;
+            $links->linkName = $k['linkname'];
+            $links->order = $k['order'];
+            $links->location = $k['location']; //1 == navbar
+            $links->owner = $k['owner'];
+            $links->created = R::isoDateTime();
+            $links->modified = R::isoDateTime();
+
+            R::store($links);
+        }
+
     }
 
     function install_siteData($data)

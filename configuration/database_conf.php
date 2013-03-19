@@ -33,3 +33,9 @@ $database['password']   = 'secure99';           // DB Engine Password
 $database['charset']    = 'utf8';               // Default charset - recommend 'utf8'
 $database['prefix']     = '';                   // Database table prefix ie. 'deadSimple_'
 $database['schema']     = 'public';             // Usually 'public';
+
+// **** SQLite *******
+//$database['driver']     = 'sqlite';              // sqlite,mysql or pgsql
+//$database['database']   = $GLOBALS['sitePath'] . '/database/deadsimple.txt'; //Do not alter $GLOBALS['sitePath']
+//$database['username']   = 'laravel';            // DB Engine Username
+//$database['password']   = 'secure99';           // DB Engine Password

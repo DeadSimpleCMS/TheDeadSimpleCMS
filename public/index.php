@@ -26,4 +26,8 @@ unset($paths);
 ini_set('display_errors', 1);
 
 // let's get started
-require_once 'core.php';
+if(file_exists($publicPath . '/installer'))
+{
+    require_once $publicPath . '/installer/index.php';
+}
+//require_once 'core.php';
