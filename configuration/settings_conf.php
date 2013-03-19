@@ -26,5 +26,5 @@
 $settings['base_url']           = 'http://nginx.internal/';
 $settings['default_controller'] = 'home';       //Set to whatever the default controller name is.
 $settings['php_debug']          = false;        //Set this to true during installation and development.
-$settings['view_debug']         = true;         //WARNING DO NOT SET TO TRUE IN PRODUCTION ENVIORNMENT.
+$settings['view_debug']         = false;         //WARNING DO NOT SET TO TRUE IN PRODUCTION ENVIORNMENT.
 $settings['sql_debug']          = false;        //This either...
