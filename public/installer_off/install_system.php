@@ -52,7 +52,7 @@ class Install_system
 
     private function checkFiles($file)
     {
-        $checkPath = $GLOBALS['sitePath'];
+        $checkPath = ROOT_PATH;
         if (!is_writable($v = $checkPath . $file))
         {
             echo $v .' is not writable or does not exist. ';
