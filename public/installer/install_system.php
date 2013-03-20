@@ -52,7 +52,7 @@ class Install_system
 
     private function checkFiles($file)
     {
-        $checkPath = $GLOBALS['sitePath'];
+        $checkPath = ROOT_PATH;
         if (!is_writable($v = $checkPath . $file))
         {
             echo $v .' is not writable or does not exist. ';
@@ -94,7 +94,7 @@ class Install_system
     {
         if($this->checkFiles('/application/views/smart/templates_c') &&
             $this->checkFiles('/application/views/smart/templates') &&
-            $this->checkFiles('/application/views/smart/config') &&
+            $this->checkFiles('/application/views/smart/configs') &&
             $this->checkFiles('/application/views/smart/cache') &&
             $this->checkFiles('/database'))
         {
