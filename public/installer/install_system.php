@@ -96,13 +96,15 @@ class Install_system
             $this->checkFiles('/application/views/smart/templates') &&
             $this->checkFiles('/application/views/smart/configs') &&
             $this->checkFiles('/application/views/smart/cache') &&
-            $this->checkFiles('/database'))
+            $this->checkFiles('/database') &&
+            $this->checkFiles('/public/installer'))
         {
             echo "System directories seem to be in order." . '<br>';
             return true;
         }
         else
         {
+            //TODO: This is being called by mistake. FIX IT!!
             echo "Sorry, there has been an unexpected error." . '<br>';
             echo "Please ensure that all system files are in the correct locations." . '<br>';
             echo "If this error persists please open an issue on..";
