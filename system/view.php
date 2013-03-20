@@ -22,6 +22,7 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 class View
 {
     public $smarty;
@@ -30,7 +31,7 @@ class View
 
     function __construct()
     {
-        $this->path = $GLOBALS['sitePath'] . '/application/views/smart/';
+        $this->path = ROOT_PATH . '/application/views/smart/';
         $this->smarty = new Smarty();
         $this->smarty->setTemplateDir($this->path . 'templates/');
         $this->smarty->setCompileDir($this->path . 'templates_c/');

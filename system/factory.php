@@ -22,15 +22,16 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 class Factory
 {
-    private $router;
+    private $_router;
+    private $_requestHandler;
 
     public function newRouter()
     {
-        $this->router = new Router();
-        return $this->router;
+        $this->_router = new Router();
+        return $this->_router;
     }
-
 
 }

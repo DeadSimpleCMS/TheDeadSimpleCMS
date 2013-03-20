@@ -1,21 +1,28 @@
 <?php
 
-$publicPath = getcwd();
+define('PUBLIC_PATH', getcwd());
+
 chdir(__DIR__ . "/..");
-$sitePath = getcwd();
-chdir($publicPath);
+define('ROOT_PATH', getcwd());
+
+chdir(PUBLIC_PATH);
+
+define('APPLICATION_PATH', ROOT_PATH . '/application');
+define('SYSTEM_PATH', ROOT_PATH . '/system');
+define('LIBRARY_PATH', ROOT_PATH . '/lib');
+define('CONFIG_PATH', ROOT_PATH . '/configuration');
 
 $paths = array(
-    $sitePath . '/application/views',
-    $sitePath . '/application/controllers',
-    $sitePath . '/application/models',
-    $sitePath . '/system',
-    $sitePath . '/application',
-    $sitePath . '/configuration',
-    $sitePath . '/lib',
-    $sitePath . '/lib/Smarty/libs',
-    $sitePath . '/lib/Smarty/libs/plugins',
-    $sitePath . '/lib/Smarty/libs/sysplugins',
+    CONFIG_PATH,
+    SYSTEM_PATH,
+    APPLICATION_PATH,
+    APPLICATION_PATH . '/views',
+    APPLICATION_PATH . '/controllers',
+    APPLICATION_PATH . '/models',
+    LIBRARY_PATH,
+    LIBRARY_PATH . '/Smarty/libs',
+    LIBRARY_PATH . '/Smarty/libs/plugins',
+    LIBRARY_PATH . '/Smarty/libs/sysplugins',
     get_include_path()
 );
 
@@ -26,8 +33,11 @@ unset($paths);
 ini_set('display_errors', 1);
 
 // let's get started
-if(file_exists($publicPath . '/installer'))
+if(file_exists(PUBLIC_PATH . '/installer'))
 {
-    require_once $publicPath . '/installer/index.php';
+    require_once PUBLIC_PATH . '/installer/index.php';
 }
-//require_once 'core.php';
+else
+{
+    require_once 'core.php';
+}

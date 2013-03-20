@@ -1,5 +1,6 @@
 <?php
 
+
 class Load {
 
     private static $instance;
@@ -35,7 +36,7 @@ class Load {
     function controller($file_name)
     {
         $file = $file_name . "_controller.php";
-        $path = $GLOBALS["sitePath"] . '/application/controllers/';
+        $path = ROOT_PATH . '/application/controllers/';
         try
         {
             if(!file_exists($path . $file))
@@ -59,7 +60,7 @@ class Load {
     function model($file_name, $data = null)
     {
         $file = $file_name . "_model.php";
-        $path = $GLOBALS["sitePath"] . '/application/models/';
+        $path = ROOT_PATH . '/application/models/';
         try
         {
             if(!file_exists($path . $file))

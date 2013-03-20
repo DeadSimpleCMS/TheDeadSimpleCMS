@@ -23,6 +23,7 @@
  * SOFTWARE.
  */
 
+
 class Controller
 {
     public $config;

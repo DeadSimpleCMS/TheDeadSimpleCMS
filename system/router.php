@@ -22,6 +22,7 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 class Router
 {
     public static $route;
@@ -40,9 +41,11 @@ class Router
 
     function getURL()
     {
-        $route = parse_url($_SERVER["REQUEST_URI"]);
-        $segments = explode('/', $route["path"]);
-        //var_dump($segments);
+        $path = &$_SERVER["REQUEST_URI"];
+        $route = parse_url($path, PHP_URL_PATH);
+        $segments = explode('/', $route);
+        var_dump($segments);
+        echo $route['path'];
         return $segments;
     }
 
