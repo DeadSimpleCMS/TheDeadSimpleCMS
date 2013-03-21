@@ -26,21 +26,27 @@
 class RequestHandler
 {
     private $_rawRoute;
-    private $_route;
+    private $_filteredRoute;
     private $_requestMethod;
-    private $_baseRoute;
+    private $_baseURL;
     private $_config;
 
     function __construct()
     {
         $this->_config = Load::getInstance()->config('settings');
         $this->_requestMethod = &$_SERVER['REQUEST_METHOD'];
-        $this->_baseRoute = $this->_config['base_url'];
+        $this->_baseURL = $this->_config['base_url'];
         $this->_rawRoute = &$_SERVER["REQUEST_URI"];
-        $this->_route = $this->_getURL();
-        $this->testMatch();
+        $this->_filteredRoute = $this->removeBaseUrl($this->_getURL());
+        $this->removeBlankUrl();
+
+        var_dump($this->_filteredRoute);
     }
 
+    /**
+     * Turn the request url into an array.
+     * @return array
+     */
     private function _getURL()
     {
         $route = parse_url($this->_rawRoute, PHP_URL_PATH);
@@ -49,18 +55,40 @@ class RequestHandler
         return $segments;
     }
 
-    function testMatch()
+    /**
+     * Return Request url with base url removed.
+     * @param $url
+     * @return mixed
+     */
+    function removeBaseUrl($url)
     {
-        echo '<br>';
-        echo $h = $this->_baseRoute . $this->_rawRoute;
-        echo '<br>';
+        $configBaseURL = explode('/',$this->_baseURL);
+        $unfilteredRoute = $url;
 
-        foreach($this->_route as $value)
+        foreach($configBaseURL as $key => $value)
         {
-            echo $value;
+            if(in_array($value, $unfilteredRoute))
+            {
+                unset($this->_filteredRoute[$key]);
+            }
         }
-        echo '<br>';
+        return $unfilteredRoute;
+    }
 
-       echo stristr($h, $this->_rawRoute);
+    /**
+     * Remove blank spaces from URL
+     */
+    function removeBlankUrl()
+    {
+        $unfilteredRoute = &$this->_filteredRoute;
+
+        foreach($unfilteredRoute as $key => $value)
+        {
+            if($value == '')
+            {
+                unset($unfilteredRoute[$key]);
+            }
+        }
+        $this->_filteredRoute = $unfilteredRoute;
     }
 }
