@@ -69,7 +69,7 @@ class RequestHandler
         {
             if(in_array($value, $unfilteredRoute))
             {
-                unset($this->_filteredRoute[$key]);
+                unset($unfilteredRoute[$key]);
             }
         }
         return $unfilteredRoute;
@@ -89,6 +89,6 @@ class RequestHandler
                 unset($unfilteredRoute[$key]);
             }
         }
-        $this->_filteredRoute = $unfilteredRoute;
+        $this->_filteredRoute = array_values($unfilteredRoute);
     }
 }
