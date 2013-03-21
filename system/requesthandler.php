@@ -52,12 +52,15 @@ class RequestHandler
     function testMatch()
     {
         echo '<br>';
-        echo $this->_baseRoute . $this->_rawRoute;
+        echo $h = $this->_baseRoute . $this->_rawRoute;
         echo '<br>';
 
         foreach($this->_route as $value)
         {
             echo $value;
         }
+        echo '<br>';
+
+       echo stristr($h, $this->_rawRoute);
     }
 }

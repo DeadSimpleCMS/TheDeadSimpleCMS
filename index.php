@@ -1,8 +1,7 @@
 <?php
 
-define('PUBLIC_PATH', getcwd());
+define('PUBLIC_PATH', getcwd() . '/public');
 
-chdir(__DIR__ . "/..");
 define('ROOT_PATH', getcwd());
 
 chdir(PUBLIC_PATH);
