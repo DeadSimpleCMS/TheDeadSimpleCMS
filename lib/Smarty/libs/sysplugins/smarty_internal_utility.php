@@ -113,14 +113,14 @@ class Smarty_Internal_Utility {
     }
 
     /**
-     * Compile all config files
+     * Compile all configs files
      *
-     * @param string $extension     config file name extension
+     * @param string $extension     configs file name extension
      * @param bool   $force_compile force all to recompile
      * @param int    $time_limit    set maximum execution time
      * @param int    $max_errors    set maximum allowed errors
      * @param Smarty $smarty        Smarty instance
-     * @return integer number of config files compiled
+     * @return integer number of configs files compiled
      */
     public static function compileAllConfig($extention, $force_compile, $time_limit, $max_errors, Smarty $smarty)
     {

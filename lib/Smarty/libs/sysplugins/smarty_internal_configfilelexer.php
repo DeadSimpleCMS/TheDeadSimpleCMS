@@ -2,7 +2,7 @@
 /**
 * Smarty Internal Plugin Configfilelexer
 *
-* This is the lexer to break the config file source into tokens
+* This is the lexer to break the configs file source into tokens
 * @package Smarty
 * @subpackage Config
 * @author Uwe Tews

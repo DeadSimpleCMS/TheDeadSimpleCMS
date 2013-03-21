@@ -50,7 +50,7 @@ class Database
                 R::setup("sqlite:{$v["database"]}","{$v["username"]}","{$v["password"]}");
                 break;
             default:
-                echo "THere is a problem with your config file, please check the value of the \"database\" array value
+                echo "THere is a problem with your configs file, please check the value of the \"database\" array value
                 in /configuration/configuration.php";
         }
 

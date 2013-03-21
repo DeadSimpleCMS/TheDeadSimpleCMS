@@ -31,7 +31,7 @@ class Install_controller extends Controller
 
         $this->checkFiles('templates_c');
         $this->checkFiles('templates');
-        $this->checkFiles('config');
+        $this->checkFiles('configs');
         $this->checkFiles('cache');
     }
 

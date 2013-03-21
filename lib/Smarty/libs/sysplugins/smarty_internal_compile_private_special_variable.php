@@ -79,7 +79,7 @@ class Smarty_Internal_Compile_Private_Special_Variable extends Smarty_Internal_C
                 }
                 return "@constant({$_index[1]})";
 
-            case 'config':
+            case 'configs':
                 if (isset($_index[2])) {
                     return "(is_array(\$tmp = \$_smarty_tpl->getConfigVariable($_index[1])) ? \$tmp[$_index[2]] : null)";
                 } else {

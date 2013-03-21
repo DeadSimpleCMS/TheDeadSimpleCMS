@@ -641,7 +641,7 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
         if (is_callable($callback)) {
             $this->smarty->default_config_handler_func = $callback;
         } else {
-            throw new SmartyException("Default config handler '$callback' not callable");
+            throw new SmartyException("Default configs handler '$callback' not callable");
         }
 
         return $this;

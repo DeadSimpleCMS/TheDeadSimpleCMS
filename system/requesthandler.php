@@ -23,6 +23,41 @@
  * SOFTWARE.
  */
 
-class RequestHandler {
+class RequestHandler
+{
+    private $_rawRoute;
+    private $_route;
+    private $_requestMethod;
+    private $_baseRoute;
+    private $_config;
 
+    function __construct()
+    {
+        $this->_config = Load::getInstance()->config('settings');
+        $this->_requestMethod = &$_SERVER['REQUEST_METHOD'];
+        $this->_baseRoute = $this->_config['base_url'];
+        $this->_rawRoute = &$_SERVER["REQUEST_URI"];
+        $this->_route = $this->_getURL();
+        $this->testMatch();
+    }
+
+    private function _getURL()
+    {
+        $route = parse_url($this->_rawRoute, PHP_URL_PATH);
+        $segments = explode('/', $route);
+
+        return $segments;
+    }
+
+    function testMatch()
+    {
+        echo '<br>';
+        echo $this->_baseRoute . $this->_rawRoute;
+        echo '<br>';
+
+        foreach($this->_route as $value)
+        {
+            echo $value;
+        }
+    }
 }

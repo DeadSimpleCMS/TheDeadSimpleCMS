@@ -2,7 +2,7 @@
 /**
  * Smarty Internal Plugin Compile Config Load
  *
- * Compiles the {config load} tag
+ * Compiles the {configs load} tag
  *
  * @package Smarty
  * @subpackage Compiler
@@ -74,7 +74,7 @@ class Smarty_Internal_Compile_Config_Load extends Smarty_Internal_CompileBase {
                 $compiler->trigger_template_error('illegal value for "scope" attribute', $compiler->lex->taglineno);
            }
         }
-        // create config object
+        // create configs object
         $_output = "<?php  \$_config = new Smarty_Internal_Config($conf_file, \$_smarty_tpl->smarty, \$_smarty_tpl);";
         $_output .= "\$_config->loadConfigVars($section, '$scope'); ?>";
         return $_output;

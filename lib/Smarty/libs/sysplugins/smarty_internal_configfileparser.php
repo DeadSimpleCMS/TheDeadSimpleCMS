@@ -2,7 +2,7 @@
 /**
 * Smarty Internal Plugin Configfileparser
 *
-* This is the config file parser.
+* This is the configs file parser.
 * It is generated from the internal.configfileparser.y file
 * @package Smarty
 * @subpackage Compiler

@@ -44,8 +44,6 @@ class Router
         $path = &$_SERVER["REQUEST_URI"];
         $route = parse_url($path, PHP_URL_PATH);
         $segments = explode('/', $route);
-        var_dump($segments);
-        echo $route['path'];
         return $segments;
     }
 

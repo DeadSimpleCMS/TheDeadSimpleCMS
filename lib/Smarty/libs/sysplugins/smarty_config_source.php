@@ -64,7 +64,7 @@ class Smarty_Config_Source extends Smarty_Template_Source {
                 break;
 
             default:
-                throw new SmartyException("invalid config property '$property_name'.");
+                throw new SmartyException("invalid configs property '$property_name'.");
         }
     }
 
@@ -86,7 +86,7 @@ class Smarty_Config_Source extends Smarty_Template_Source {
                 return $this->content = $this->handler->getContent($this);
 
             default:
-                throw new SmartyException("config property '$property_name' does not exist.");
+                throw new SmartyException("configs property '$property_name' does not exist.");
         }
     }
 
