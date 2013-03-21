@@ -27,6 +27,7 @@ require 'load.php';
 require 'factory.php';
 require 'database.php';
 require 'model.php';
+require 'requesthandler.php';
 require 'router.php';
 require 'Validate.php';
 require 'validator.php';
@@ -38,6 +39,7 @@ require 'controller.php';
 
 
 $factory = new Factory();
+$request = new RequestHandler();
 $factory->newRouter();
 
 
