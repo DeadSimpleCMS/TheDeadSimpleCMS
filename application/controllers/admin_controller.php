@@ -33,7 +33,7 @@ class Admin_controller extends Controller
         $data = $m->user_info();
         $data['pages'] = $n->getLatestPage(13);
         $data['page_title'] = 'Administration';
-        $data['css_file'] = '/assets/css/admin.css';
+        $data['css_file'] = '/public/assets/css/admin.css';
 
         $this->load->view('base/header', $data);
         $this->load->view('admin_index', $data);

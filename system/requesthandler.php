@@ -31,16 +31,46 @@ class RequestHandler
     private $_baseURL;
     private $_config;
 
+
+    private $_class;  //Returns the class requested by the url, false if it doesn't exist.
+    private $_method; //Returns the method requested by the url, false if it doesn't exist.
+    private $_parameters; //Returns the parameters given by the url.
+    private $_routeArray;
+
     function __construct()
     {
-        $this->_config = Load::getInstance()->config('settings');
-        $this->_requestMethod = &$_SERVER['REQUEST_METHOD'];
-        $this->_baseURL = $this->_config['base_url'];
-        $this->_rawRoute = &$_SERVER["REQUEST_URI"];
-        $this->_filteredRoute = $this->removeBaseUrl($this->_getURL());
+        $this->_config          = Load::getInstance()->config('settings');
+        $this->_requestMethod   = &$_SERVER['REQUEST_METHOD'];
+        $this->_baseURL         = $this->_config['base_url'];
+        $this->_rawRoute        = &$_SERVER["REQUEST_URI"];
+        $this->_filteredRoute   = $this->removeBaseUrl($this->_getURL());
         $this->removeBlankUrl();
 
-        var_dump($this->_filteredRoute);
+        $this->_parameters      = $this->parseParams();
+        $this->_class           = $this->parseClass();
+        $this->_method          = $this->parseMethod();
+
+        $this->_routeArray      = $this->constructRouteArray();
+    }
+
+    public function getRouteArray()
+    {
+        return $this->_routeArray;
+    }
+
+    public function getClass()
+    {
+        return $this->_class;
+    }
+
+    public function getMethod()
+    {
+        return $this->_method;
+    }
+
+    public function getParameters()
+    {
+        return $this->_parameters;
     }
 
     /**
@@ -68,7 +98,7 @@ class RequestHandler
         foreach($configBaseURL as $key => $value)
         {
             if(in_array($value, $unfilteredRoute))
-            {
+            {$this->_filteredRoute = array_values($unfilteredRoute);
                 unset($unfilteredRoute[$key]);
             }
         }
@@ -80,7 +110,7 @@ class RequestHandler
      */
     function removeBlankUrl()
     {
-        $unfilteredRoute = &$this->_filteredRoute;
+        $unfilteredRoute = $this->_filteredRoute;
 
         foreach($unfilteredRoute as $key => $value)
         {
@@ -90,5 +120,85 @@ class RequestHandler
             }
         }
         $this->_filteredRoute = array_values($unfilteredRoute);
+    }
+
+    /**
+     * @return bool
+     */
+    function parseClass()
+    {
+        $class = isset($this->_filteredRoute[0]) ? $this->_filteredRoute[0] : null;
+
+        if(isset($class))
+        {
+            return $class;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    /**
+     * @return bool
+     */
+    function parseMethod()
+    {
+
+        $method = isset($this->_filteredRoute[1]) ? $this->_filteredRoute[1] : null;
+
+        if(isset($method))
+        {
+            return $method;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    function parseParams()
+    {
+        $localRoute = $this->_filteredRoute;
+        $parameters = array();
+        $class = isset($localRoute[0]) ? $localRoute[0] . '_controller' : null;
+
+        if (file_exists(APPLICATION_PATH . '/controllers/'. $class . '.php'))
+        {
+            require_once $class . '.php';
+
+            $method = isset($localRoute[1]) ? $localRoute[1] : null;
+            if(method_exists($class, $method))
+            {
+                array_shift($localRoute);
+                array_shift($localRoute);
+                return $parameters = $localRoute;
+            }
+            else
+            {
+                array_shift($localRoute);
+
+                return $parameters = $localRoute;
+            }
+        }
+        else
+        {
+            $parameters = $localRoute;
+        }
+        return false;//$parameters;
+    }
+
+    function constructRouteArray()
+    {
+        $constructedRoute = array();
+        $c = isset($this->_class)       ? $this->_class  : null;
+        $m = isset($this->_method)      ? $this->_method : null;
+        $p = isset($this->_parameters)  ? $this->_parameters : null;
+
+        $constructedRoute['class'] =  $c;
+        $constructedRoute['method'] = $m;
+        $constructedRoute['params'] = $p;
+
+        return $constructedRoute;
     }
 }

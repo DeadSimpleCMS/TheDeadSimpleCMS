@@ -29,77 +29,61 @@ class Router
 
     private $load;
 
+    private $_class;
+    private $_method;
+    private $_params;
+
     //This construct bootstraps the entire site, all core logic stems from this point.
     function __construct()
     {
-        //Get the current url as array
-        $this->route = $this->getURL();
+
         $this->load  = Load::getInstance();
+        $routeArray = new RequestHandler();
+        $routeArray = $routeArray->getRouteArray();
 
-        $this->buildRoute();
+        $this->_class   = $routeArray['class'];
+        $this->_method  = $routeArray['method'];
+        $this->_params  = $routeArray['params'];
+        var_dump($routeArray);
+
+        $this->callRoute();
+        //$this->buildRoute();
     }
 
-    function getURL()
+    function callRoute()
     {
-        $path = &$_SERVER["REQUEST_URI"];
-        $route = parse_url($path, PHP_URL_PATH);
-        $segments = explode('/', $route);
-        return $segments;
-    }
+        $file = $this->_class;
+        $class = $file . '_controller';
 
-    function returnMethod()
-    {
-        return $this->route[1];
-    }
-
-    function returnParams()
-    {
-        //Suppress warning so it can return false;
-        if(@$this->route[2])
+        if(!$this->_class) //Defaults to false, route to home controller
         {
-            return $this->route[2];
+            $this->load->controller('home');
+            $c = new Home_controller();
+            call_user_func( array( $c, 'index' ) );
         }
-        else
+        else //If the class has a value see if it is valid, if so load it.
         {
-            return false;
-        }
-    }
-
-    function buildRoute()
-    {
-        if($this->returnMethod())
-        {
-            $file = $this->returnMethod();
-            $class = $file . '_controller';
-
-            //returns true if it finds a matching class to load.
             if($this->load->controller($file))
             {
                 $c = new $class();
 
-                if($this->returnParams())
+                if($this->_method)
                 {
-                    call_user_func( array( $c, $this->returnParams() ) );
+                    call_user_func( array( $c, $this->_method ) );
                 }
                 else
                 {
                     call_user_func( array( $c, 'index' ) );
                 }
             }
-            else
+            else //If none of the above route to the error controller and call a 404.
             {
                 $this->load->controller('error');
                 $c = new Error_controller();
                 call_user_func( array( $c, 'index' ) );
             }
+        }
 
-        }
-        else
-        {
-            $this->load->controller('home');
-            $c = new Home_controller();
-            call_user_func( array( $c, 'index' ) );
-        }
     }
 
 }
