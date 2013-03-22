@@ -67,7 +67,7 @@ class Router
             {
                 $c = new $class();
 
-                if($this->_method)
+                if($this->filterMethod($c, $this->_method ))
                 {
                     call_user_func( array( $c, $this->_method ) );
                 }
@@ -83,7 +83,21 @@ class Router
                 call_user_func( array( $c, 'index' ) );
             }
         }
+            $this->filterMethod($c, $this->_method);
+    }
 
+    //TODO:Possibly need to move this to the request handler.
+    private function filterMethod($class, $method)
+    {
+        $filteredMethod = false;
+        if(method_exists($class, $method) && $method != '__construct')
+        {
+            $this->_method = $method;
+        }
+        else
+        {
+            return $filteredMethod;
+        }
     }
 
 }
