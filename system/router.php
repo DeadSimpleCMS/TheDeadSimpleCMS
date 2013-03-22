@@ -47,9 +47,8 @@ class Router
         var_dump($routeArray);
 
         $this->callRoute();
-        //$this->buildRoute();
     }
-
+//TODO: FILTER THE PARAMETERS
     function callRoute()
     {
         $file = $this->_class;
@@ -59,7 +58,7 @@ class Router
         {
             $this->load->controller('home');
             $c = new Home_controller();
-            call_user_func( array( $c, 'index' ) );
+            call_user_func_array( array( $c, 'index' ), $this->_params );
         }
         else //If the class has a value see if it is valid, if so load it.
         {
@@ -67,13 +66,13 @@ class Router
             {
                 $c = new $class();
 
-                if($this->filterMethod($c, $this->_method ))
+                if($this->_method )
                 {
-                    call_user_func( array( $c, $this->_method ) );
+                    call_user_func_array( array( $c, $this->_method ), $this->_params );
                 }
                 else
                 {
-                    call_user_func( array( $c, 'index' ) );
+                    call_user_func_array( array( $c, 'index' ), $this->_params );
                 }
             }
             else //If none of the above route to the error controller and call a 404.
@@ -83,21 +82,5 @@ class Router
                 call_user_func( array( $c, 'index' ) );
             }
         }
-            $this->filterMethod($c, $this->_method);
     }
-
-    //TODO:Possibly need to move this to the request handler.
-    private function filterMethod($class, $method)
-    {
-        $filteredMethod = false;
-        if(method_exists($class, $method) && $method != '__construct')
-        {
-            $this->_method = $method;
-        }
-        else
-        {
-            return $filteredMethod;
-        }
-    }
-
 }

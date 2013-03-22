@@ -185,14 +185,14 @@ class RequestHandler
         {
             $parameters = $localRoute;
         }
-        return false;//$parameters;
+        return $parameters;
     }
 
     function constructRouteArray()
     {
         $constructedRoute = array();
         $c = isset($this->_class)       ? $this->_class  : null;
-        $m = isset($this->_method)      ? $this->_method : null;
+        $m = $this->filterMethod($this->_class, $this->_method);//isset($this->_method)      ? $this->_method : null;
         $p = isset($this->_parameters)  ? $this->_parameters : null;
 
         $constructedRoute['class'] =  $c;
@@ -200,5 +200,19 @@ class RequestHandler
         $constructedRoute['params'] = $p;
 
         return $constructedRoute;
+    }
+
+    private function filterMethod($class, $method)
+    {
+        $filteredMethod = false;
+        $localClass = $class . '_controller';
+        if(method_exists($localClass, $method) && $method != '__construct')
+        {
+            return $method;
+        }
+        else
+        {
+            return $filteredMethod;
+        }
     }
 }
