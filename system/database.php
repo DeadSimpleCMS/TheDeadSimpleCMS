@@ -35,26 +35,27 @@ class Database
         $this->settings = $loader->config('settings');
         $this->db       = $loader->config('database');
 
-        switch($this->db['driver'])
+        switch ($this->db['driver'])
         {
+
             case 'pgsql':
                 $v = $this->db;
-                R::setup("pgsql:host={$v["host"]};dbname={$v["database"]}","{$v["username"]}","{$v["password"]}");
+                R::setup("pgsql:host={$v["host"]};dbname={$v["database"]}", "{$v["username"]}", "{$v["password"]}");
                 break;
             case 'mysql':
                 $v = $this->db;
-                R::setup("mysql:host={$v["host"]};dbname={$v["database"]}","{$v["username"]}","{$v["password"]}");
+                R::setup("mysql:host={$v["host"]};dbname={$v["database"]}", "{$v["username"]}", "{$v["password"]}");
                 break;
             case 'sqlite':
                 $v = $this->db;
-                R::setup("sqlite:{$v["database"]}","{$v["username"]}","{$v["password"]}");
+                R::setup("sqlite:{$v["database"]}", "{$v["username"]}", "{$v["password"]}");
                 break;
             default:
                 echo "THere is a problem with your configs file, please check the value of the \"database\" array value
                 in /configuration/configuration.php";
         }
 
-        if($this->settings['sql_debug'])
+        if ($this->settings['sql_debug'])
         {
             R::debug(true);
         }
@@ -64,9 +65,9 @@ class Database
     {
         $db = R::$writer->getTables();
         echo '<br>';
-        foreach($db as $k => $v)
+        foreach ($db as $k => $v)
         {
-            echo 'Table ' . '"'. $v . '"'. ' loaded and initialized.' .'<br>';
+            echo 'Table ' . '"' . $v . '"' . ' loaded and initialized.' . '<br>';
         }
     }
 

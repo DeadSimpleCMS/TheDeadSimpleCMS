@@ -32,11 +32,12 @@ unset($paths);
 ini_set('display_errors', 1);
 
 // let's get started
-if(file_exists(PUBLIC_PATH . '/installer'))
+if(false)//file_exists(PUBLIC_PATH . '/installer'))
 {
     require_once PUBLIC_PATH . '/installer/index.php';
 }
 else
 {
+
     require_once 'core.php';
 }

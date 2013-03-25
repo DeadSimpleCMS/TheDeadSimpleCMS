@@ -8,18 +8,18 @@
  *
  * Copyright (c) 2013 monstertke
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
- * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the 
- * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to  
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the 
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
  * Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE 
- * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR 
- * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, 
- * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+ * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
 
@@ -32,25 +32,25 @@ class RequestHandler
     private $_config;
 
 
-    private $_class;  //Returns the class requested by the url, false if it doesn't exist.
+    private $_class; //Returns the class requested by the url, false if it doesn't exist.
     private $_method; //Returns the method requested by the url, false if it doesn't exist.
     private $_parameters; //Returns the parameters given by the url.
     private $_routeArray;
 
     function __construct()
     {
-        $this->_config          = Load::getInstance()->config('settings');
-        $this->_requestMethod   = &$_SERVER['REQUEST_METHOD'];
-        $this->_baseURL         = $this->_config['base_url'];
-        $this->_rawRoute        = &$_SERVER["REQUEST_URI"];
-        $this->_filteredRoute   = $this->removeBaseUrl($this->_getURL());
+        $this->_config        = Load::getInstance()->config('settings');
+        $this->_requestMethod = & $_SERVER['REQUEST_METHOD'];
+        $this->_baseURL       = $this->_config['base_url'];
+        $this->_rawRoute      = & $_SERVER["REQUEST_URI"];
+        $this->_filteredRoute = $this->removeBaseUrl($this->_getURL());
         $this->removeBlankUrl();
 
-        $this->_parameters      = $this->parseParams();
-        $this->_class           = $this->parseClass();
-        $this->_method          = $this->parseMethod();
+        $this->_parameters = $this->parseParams();
+        $this->_class      = $this->parseClass();
+        $this->_method     = $this->parseMethod();
 
-        $this->_routeArray      = $this->constructRouteArray();
+        $this->_routeArray = $this->constructRouteArray();
     }
 
     public function getRouteArray()
@@ -79,7 +79,7 @@ class RequestHandler
      */
     private function _getURL()
     {
-        $route = parse_url($this->_rawRoute, PHP_URL_PATH);
+        $route    = parse_url($this->_rawRoute, PHP_URL_PATH);
         $segments = explode('/', $route);
 
         return $segments;
@@ -92,13 +92,14 @@ class RequestHandler
      */
     function removeBaseUrl($url)
     {
-        $configBaseURL = explode('/',$this->_baseURL);
+        $configBaseURL   = explode('/', $this->_baseURL);
         $unfilteredRoute = $url;
 
-        foreach($configBaseURL as $key => $value)
+        foreach ($configBaseURL as $key => $value)
         {
-            if(in_array($value, $unfilteredRoute))
-            {$this->_filteredRoute = array_values($unfilteredRoute);
+            if (in_array($value, $unfilteredRoute))
+            {
+                $this->_filteredRoute = array_values($unfilteredRoute);
                 unset($unfilteredRoute[$key]);
             }
         }
@@ -112,9 +113,9 @@ class RequestHandler
     {
         $unfilteredRoute = $this->_filteredRoute;
 
-        foreach($unfilteredRoute as $key => $value)
+        foreach ($unfilteredRoute as $key => $value)
         {
-            if($value == '')
+            if ($value == '')
             {
                 unset($unfilteredRoute[$key]);
             }
@@ -129,7 +130,7 @@ class RequestHandler
     {
         $class = isset($this->_filteredRoute[0]) ? $this->_filteredRoute[0] : null;
 
-        if(isset($class))
+        if (isset($class))
         {
             return $class;
         }
@@ -147,7 +148,7 @@ class RequestHandler
 
         $method = isset($this->_filteredRoute[1]) ? $this->_filteredRoute[1] : null;
 
-        if(isset($method))
+        if (isset($method))
         {
             return $method;
         }
@@ -161,14 +162,14 @@ class RequestHandler
     {
         $localRoute = $this->_filteredRoute;
         $parameters = array();
-        $class = isset($localRoute[0]) ? $localRoute[0] . '_controller' : null;
+        $class      = isset($localRoute[0]) ? $localRoute[0] . '_controller' : null;
 
-        if (file_exists(APPLICATION_PATH . '/controllers/'. $class . '.php'))
+        if (file_exists(APPLICATION_PATH . '/controllers/' . $class . '.php'))
         {
             require_once $class . '.php';
 
             $method = isset($localRoute[1]) ? $localRoute[1] : null;
-            if(method_exists($class, $method))
+            if (method_exists($class, $method))
             {
                 array_shift($localRoute);
                 array_shift($localRoute);
@@ -190,23 +191,23 @@ class RequestHandler
 
     function constructRouteArray()
     {
-        $constructedRoute = array();
-        $c = isset($this->_class)       ? $this->_class  : null;
-        $m = $this->filterMethod($this->_class, $this->_method);//isset($this->_method)      ? $this->_method : null;
-        $p = isset($this->_parameters)  ? $this->_parameters : null;
+        $constRoute = array();
+        $c                = isset($this->_class) ? $this->_class : null;
+        $m                = $this->filterMethod($this->_class, $this->_method);
+        $p                = isset($this->_parameters) ? $this->_parameters : null;
 
-        $constructedRoute['class'] =  $c;
-        $constructedRoute['method'] = $m;
-        $constructedRoute['params'] = $p;
+        $constRoute['class']  = $c;
+        $constRoute['method'] = $m;
+        $constRoute['params'] = $p;
 
-        return $constructedRoute;
+        return $constRoute;
     }
 
     private function filterMethod($class, $method)
     {
         $filteredMethod = false;
-        $localClass = $class . '_controller';
-        if(method_exists($localClass, $method) && $method != '__construct')
+        $localClass     = $class . '_controller';
+        if (method_exists($localClass, $method) && $method != '__construct')
         {
             return $method;
         }

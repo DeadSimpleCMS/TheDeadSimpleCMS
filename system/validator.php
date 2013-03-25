@@ -27,7 +27,7 @@ class Validator
 {
     function string($string, $rules, $min_limit = 0, $max_limit = 0 )
     {
-        if(Validate::string($string, array( 'format'     => $this->return_rules($rules),
+        if(self::string($string, array( 'format'     => $this->return_rules($rules),
                                             'min_length' => $min_limit,
                                             'max_length' => $max_limit)))
         {
