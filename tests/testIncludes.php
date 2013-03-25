@@ -1,10 +1,10 @@
 <?php
 /**
- * FactoryTest.php
+ * testIncludes.php
  *
  * Created By monstertke
  * Date: 3/25/13
- * Time: 12:17 AM
+ * Time: 12:37 AM
  *
  * Copyright (c) 2013 monstertke
  *
@@ -22,26 +22,31 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
  * SOFTWARE.
  */
-include 'testIncludes.php';
-include 'factory.php';
 
-class FactoryTest extends PHPUnit_Framework_TestCase
-{
-    protected $factory;
+define('PUBLIC_PATH', getcwd());
+chdir('../');
+define('ROOT_PATH', getcwd());
 
-    protected function setUp()
-    {
-        // Create the Array fixture.
-        $this->factory = new Factory();
-        var_dump($this->factory);
-    }
-//TODO: refactor everything.... Should have injected dependencies from the start...
-    public function testFactoryReturnsRouter()
-    {
-        require 'router.php';
-        require 'load.php';
-        $v = $this->factory;
-        $v->newRouter();
-    }
+chdir(PUBLIC_PATH);
 
-}
+define('APPLICATION_PATH', ROOT_PATH . '/application');
+define('SYSTEM_PATH', ROOT_PATH . '/system');
+define('LIBRARY_PATH', ROOT_PATH . '/lib');
+define('CONFIG_PATH', ROOT_PATH . '/configuration');
+
+$paths = array(
+    CONFIG_PATH,
+    SYSTEM_PATH,
+    APPLICATION_PATH,
+    APPLICATION_PATH . '/views',
+    APPLICATION_PATH . '/controllers',
+    APPLICATION_PATH . '/models',
+    LIBRARY_PATH,
+    LIBRARY_PATH . '/Smarty/libs',
+    LIBRARY_PATH . '/Smarty/libs/plugins',
+    LIBRARY_PATH . '/Smarty/libs/sysplugins',
+    get_include_path()
+);
+
+set_include_path(implode(PATH_SEPARATOR, $paths));
+unset($paths);
