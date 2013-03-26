@@ -37,9 +37,5 @@ require 'view.php';
 
 require 'controller.php';
 
-
-$factory = new Factory();
-$request = new RequestHandler();
-$factory->newRouter();
-
-
+$route = new RequestHandler($_SERVER['REQUEST_METHOD'], $_SERVER["REQUEST_URI"]);
+new Router($route);

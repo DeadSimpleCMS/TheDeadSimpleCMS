@@ -26,7 +26,6 @@
 class Factory
 {
     private $_router;
-    private $_requestHandler;
 
     public function newRouter()
     {

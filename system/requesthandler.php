@@ -37,12 +37,15 @@ class RequestHandler
     private $_parameters; //Returns the parameters given by the url.
     private $_routeArray;
 
-    function __construct()
+    function __construct($requestMethod, $requestUri)
     {
         $this->_config        = Load::getInstance()->config('settings');
-        $this->_requestMethod = & $_SERVER['REQUEST_METHOD'];
+
+        $this->_requestMethod = $requestMethod; //$_SERVER['REQUEST_METHOD']
+        $this->_rawRoute      = $requestUri;    //$_SERVER["REQUEST_URI"]
+
         $this->_baseURL       = $this->_config['base_url'];
-        $this->_rawRoute      = & $_SERVER["REQUEST_URI"];
+
         $this->_filteredRoute = $this->removeBaseUrl($this->_getURL());
         $this->removeBlankUrl();
 

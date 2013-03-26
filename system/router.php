@@ -27,24 +27,29 @@ class Router
 {
     public static $route;
 
+    /** @var Load */
     private $load;
+    /** @var RequestHandler */
+    private $request;
 
     private $_class;
     private $_method;
     private $_params;
 
-    //This construct bootstraps the entire site, all core logic stems from this point.
-    function __construct()
+    /**
+     * @param RequestHandler $request
+     */
+    function __construct(RequestHandler $request)
     {
 
         $this->load  = Load::getInstance();
-        $routeArray = new RequestHandler();
-        $routeArray = $routeArray->getRouteArray();
+        $routeArray = $request;
+        $this->request = $routeArray->getRouteArray();
 
-        $this->_class   = $routeArray['class'];
-        $this->_method  = $routeArray['method'];
-        $this->_params  = $routeArray['params'];
-        var_dump($routeArray);
+        $this->_class   = $this->request['class'];
+        $this->_method  = $this->request['method'];
+        $this->_params  = $this->request['params'];
+        var_dump($this->request);
 
         $this->callRoute();
     }
