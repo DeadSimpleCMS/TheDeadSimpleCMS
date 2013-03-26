@@ -1,10 +1,10 @@
 <?php
 /**
- * BootTest.php
+ * FactoryTest.php
  *
  * Created By monstertke
- * Date: 3/25/13
- * Time: 11:10 PM
+ * Date: 3/26/13
+ * Time: 12:55 AM
  *
  * Copyright (c) 2013 monstertke
  *
@@ -22,28 +22,7 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
  * SOFTWARE.
  */
-use DeadSimpleCMS\Boot;
-use DeadSimpleCMS\Load;
 
-include 'testIncludes.php';
-require 'load.php';
-require 'boot.php';
-
-class BootTest extends PHPUnit_Framework_TestCase {
-
-    /** @var DeadSimpleCMS\Boot */
-    protected $boot;
-
-    protected function setUp()
-    {
-        $this->boot = new Boot();
-        $this->boot->setLoad(new Load);
-    }
-
-    public function testBootReturnsLoader()
-    {
-        $g = $this->boot->getLoad();
-        $this->assertEquals($g, new Load);
-    }
+class FactoryTest extends PHPUnit_Framework_TestCase {
 
 }

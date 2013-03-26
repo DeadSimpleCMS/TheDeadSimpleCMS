@@ -26,6 +26,10 @@
 namespace DeadSimpleCMS;
 
 
+/**
+ * Class Boot
+ * @package DeadSimpleCMS
+ */
 class Boot {
 
     private $load;
