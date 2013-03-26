@@ -55,7 +55,7 @@ unset($paths);
 ini_set('display_errors', 1);
 
 
-use DeadSimpleCMS\Boot as Boot;
+use DeadSimpleCMS\Core as Boot;
 use DeadSimpleCMS\Factory as Factory;
 use DeadSimpleCMS\Load as Load;
 
@@ -73,5 +73,5 @@ if (false) //file_exists(PUBLIC_PATH . '/installer'))
 else
 {
 
-    $boot = new Boot(new Load());
+    $boot = new Core(new Load());
 }

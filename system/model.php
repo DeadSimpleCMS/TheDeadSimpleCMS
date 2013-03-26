@@ -1,10 +1,10 @@
 <?php
 /**
- * boot.php
+ * model.php
  *
  * Created By monstertke
- * Date: 3/25/13
- * Time: 10:19 PM
+ * Date: 3/26/13
+ * Time: 7:44 PM
  *
  * Copyright (c) 2013 monstertke
  *
@@ -26,27 +26,10 @@
 namespace DeadSimpleCMS;
 
 
-/**
- * Class Boot
- * @package DeadSimpleCMS
- */
-class Boot {
-
-    private $load;
+class Model {
 
     function __construct()
     {
-        echo __CLASS__ . ' loaded ';
+        parent::__construct();
     }
-
-    public function setLoad(Load $load)
-    {
-        $this->load = $load;
-    }
-
-    public function getLoad()
-    {
-        return $this->load;
-    }
-
 }

@@ -1,10 +1,10 @@
 <?php
 /**
- * BootTest.php
+ * core.php
  *
  * Created By monstertke
  * Date: 3/25/13
- * Time: 11:10 PM
+ * Time: 10:19 PM
  *
  * Copyright (c) 2013 monstertke
  *
@@ -22,28 +22,6 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
  * SOFTWARE.
  */
-use DeadSimpleCMS\Core;
-use DeadSimpleCMS\Load;
 
-include 'testIncludes.php';
-require 'load.php';
-require 'core.php';
-
-class BootTest extends PHPUnit_Framework_TestCase {
-
-    /** @var DeadSimpleCMS\Core */
-    protected $boot;
-
-    protected function setUp()
-    {
-        $this->boot = new Core();
-        $this->boot->setLoad(new Load);
-    }
-
-    public function testBootReturnsLoader()
-    {
-        $g = $this->boot->getLoad();
-        $this->assertEquals($g, new Load);
-    }
-
-}
+$route = new RequestHandler($_SERVER['REQUEST_METHOD'], $_SERVER["REQUEST_URI"]);
+new Router($route);

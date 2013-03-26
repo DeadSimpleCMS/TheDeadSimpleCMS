@@ -1,10 +1,10 @@
 <?php
 /**
- * factory.php
+ * view.php
  *
  * Created By monstertke
- * Date: 3/25/13
- * Time: 10:57 PM
+ * Date: 3/26/13
+ * Time: 7:48 PM
  *
  * Copyright (c) 2013 monstertke
  *
@@ -26,9 +26,37 @@
 namespace DeadSimpleCMS;
 
 
-class Factory {
+class View {
+
+    public $smarty;
+    private $path;
+    private $settings;
+
     function __construct()
     {
-        echo __CLASS__ . ' loaded';
+        $this->path = ROOT_PATH . '/application/views/smart/';
+        $this->smarty = new Smarty();
+        $this->smarty->setTemplateDir($this->path . 'templates/');
+        $this->smarty->setCompileDir($this->path . 'templates_c/');
+        $this->smarty->setConfigDir($this->path .'configs/');
+        $this->smarty->setCacheDir($this->path . 'cache/');
+        $this->settings = Load::getInstance();
+        $this->settings = $this->settings->config('settings');
+
+        //configuration/configuration.php $settings['view_debug']
+        if($this->settings['view_debug'])
+        {
+            $this->smarty->debugging = true;
+        }
+    }
+
+    function returnSmarty()
+    {
+        return $this->smarty;
+    }
+
+    function loadTemplate($template = null)
+    {
+        $this->smarty->display($template);
     }
 }

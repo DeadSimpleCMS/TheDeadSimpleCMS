@@ -1,10 +1,10 @@
 <?php
 /**
- * BootTest.php
+ * controller.php
  *
  * Created By monstertke
- * Date: 3/25/13
- * Time: 11:10 PM
+ * Date: 3/26/13
+ * Time: 7:43 PM
  *
  * Copyright (c) 2013 monstertke
  *
@@ -22,28 +22,18 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
  * SOFTWARE.
  */
-use DeadSimpleCMS\Core;
-use DeadSimpleCMS\Load;
 
-include 'testIncludes.php';
-require 'load.php';
-require 'core.php';
+namespace DeadSimpleCMS;
 
-class BootTest extends PHPUnit_Framework_TestCase {
 
-    /** @var DeadSimpleCMS\Core */
-    protected $boot;
+class Controller {
 
-    protected function setUp()
+    public $config;
+    public $load;
+
+    function __construct()
     {
-        $this->boot = new Core();
-        $this->boot->setLoad(new Load);
-    }
-
-    public function testBootReturnsLoader()
-    {
-        $g = $this->boot->getLoad();
-        $this->assertEquals($g, new Load);
+        $this->load = Load::getInstance();
     }
 
 }
