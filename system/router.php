@@ -52,6 +52,7 @@ class Router {
         $this->_class   = $this->request['class'];
         $this->_method  = $this->request['method'];
         $this->_params  = $this->request['params'];
+        //TODO: Remove this var dump.
         var_dump($this->request);
 
         $this->callRoute();

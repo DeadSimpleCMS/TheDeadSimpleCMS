@@ -1,10 +1,10 @@
 <?php
 /**
- * admin_controller.php
+ * usermodel.php
  *
  * Created By monstertke
  * Date: 3/26/13
- * Time: 8:15 PM
+ * Time: 9:55 PM
  *
  * Copyright (c) 2013 monstertke
  *
@@ -22,25 +22,17 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
  * SOFTWARE.
  */
+namespace DeadSimpleCMS;
 
-class Admin_controller extends \DeadSimpleCMS\Controller{
+class UserModel extends Model{
 
-    function index()
+    public function user_info()
     {
-        /** @var $m User_Model */
-        $m = $this->load->model('user');
-
-        /** @var $n Pages_model */
-        $n = $this->load->model('pages');
-        var_dump($n);
-        $data = $m->user_info();
-        $data['pages'] = $n->getLatestPage(13);
-        $data['page_title'] = 'Administration';
-        $data['css_file'] = '/public/assets/css/admin.css';
-
-        $this->load->view('base/header', $data);
-        $this->load->view('admin_index', $data);
-        $this->load->view('base/footer', $data);
+        // simulates real data
+        return array(
+            'first'         => 'James',
+            'last'          => 'Bulkowski',
+        );
 
     }
 }

@@ -55,17 +55,25 @@ unset($paths);
 ini_set('display_errors', 1);
 
 
-use DeadSimpleCMS\Core as Boot;
-use DeadSimpleCMS\Factory as Factory;
+
 use DeadSimpleCMS\Load as Load;
 
+
+function loadLibraryClass()
+{
+    require_once 'rb.php';
+}
 
 function loadSystemClass($class_name)
 {
     $parts = explode('\\', $class_name);
     require_once strtolower(end($parts)) . '.php';
+
+    //TODO: Remove this var dump
+    var_dump($parts);
 }
 
+spl_autoload_register('loadLibraryClass');
 spl_autoload_register('loadSystemClass');
 
 // let's get started

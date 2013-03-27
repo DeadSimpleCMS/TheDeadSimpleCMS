@@ -25,6 +25,8 @@
 
 namespace DeadSimpleCMS;
 
+use DeadSimpleCMS\Load as Load;
+use DeadSimpleCMS\View as View;
 
 class Load
 {
@@ -89,7 +91,7 @@ class Load
 
     function model($file_name, $data = null)
     {
-        $file = $file_name . "_model.php";
+        $file = $file_name . "model.php";
         $path = ROOT_PATH . '/application/models/';
         try
         {
@@ -100,10 +102,10 @@ class Load
             }
             else
             {
-                require_once $file;
-                $class = $file_name . '_model';
 
+                $class = $file_name . 'Model';
                 return new $class;
+
             }
         }
         catch (Exception $e)

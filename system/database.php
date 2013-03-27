@@ -24,7 +24,7 @@
  */
 
 namespace DeadSimpleCMS;
-
+use RedBean_Facade as R;
 
 class Database {
 
@@ -33,7 +33,7 @@ class Database {
 
     function __construct()
     {
-        require_once 'rb.php';
+        //require_once 'rb.php';
         $loader         = Load::getInstance();
         $this->settings = $loader->config('settings');
         $this->db       = $loader->config('database');
