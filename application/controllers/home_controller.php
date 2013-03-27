@@ -1,10 +1,10 @@
 <?php
 /**
- * core.php
+ * home_controller.php
  *
  * Created By monstertke
- * Date: 3/25/13
- * Time: 10:19 PM
+ * Date: 3/26/13
+ * Time: 8:12 PM
  *
  * Copyright (c) 2013 monstertke
  *
@@ -22,8 +22,23 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
  * SOFTWARE.
  */
-use DeadSimpleCMS\RequestHandler as RequestHandler;
-use DeadSimpleCMS\Router as Router;
 
-$route = new RequestHandler($_SERVER['REQUEST_METHOD'], $_SERVER["REQUEST_URI"]);
-new Router($route);
+class Home_controller extends DeadSimpleCMS\Controller{
+
+    function index()
+    {
+        $m = $this->load->model('user');
+
+        $data = $m->user_info();
+        $data['page_title'] = 'Dead Simple CMS';
+
+        $this->load->view('base/header', $data);
+        $this->load->view('home_index', $data);
+        $this->load->view('base/footer', $data);
+    }
+
+    function hello()
+    {
+        echo "hello";
+    }
+}

@@ -1,10 +1,10 @@
 <?php
 /**
- * core.php
+ * admin_controller.php
  *
  * Created By monstertke
- * Date: 3/25/13
- * Time: 10:19 PM
+ * Date: 3/26/13
+ * Time: 8:15 PM
  *
  * Copyright (c) 2013 monstertke
  *
@@ -22,8 +22,23 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
  * SOFTWARE.
  */
-use DeadSimpleCMS\RequestHandler as RequestHandler;
-use DeadSimpleCMS\Router as Router;
 
-$route = new RequestHandler($_SERVER['REQUEST_METHOD'], $_SERVER["REQUEST_URI"]);
-new Router($route);
+class Admin_controller extends \DeadSimpleCMS\Controller{
+
+    function index()
+    {
+
+        $m = $this->load->model('user');
+        $n = $this->load->model('pages');
+
+        $data = $m->user_info();
+        $data['pages'] = $n->getLatestPage(13);
+        $data['page_title'] = 'Administration';
+        $data['css_file'] = '/public/assets/css/admin.css';
+
+        $this->load->view('base/header', $data);
+        $this->load->view('admin_index', $data);
+        $this->load->view('base/footer', $data);
+
+    }
+}

@@ -28,8 +28,10 @@ namespace DeadSimpleCMS;
 
 class Controller {
 
-    public $config;
-    public $load;
+    protected $config;
+
+    /** @var Load */
+    protected $load;
 
     function __construct()
     {

@@ -1,10 +1,10 @@
 <?php
 /**
- * core.php
+ * settings_conf.php
  *
  * Created By monstertke
- * Date: 3/25/13
- * Time: 10:19 PM
+ * Date: 3/26/13
+ * Time: 8:02 PM
  *
  * Copyright (c) 2013 monstertke
  *
@@ -22,8 +22,9 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
  * SOFTWARE.
  */
-use DeadSimpleCMS\RequestHandler as RequestHandler;
-use DeadSimpleCMS\Router as Router;
 
-$route = new RequestHandler($_SERVER['REQUEST_METHOD'], $_SERVER["REQUEST_URI"]);
-new Router($route);
+$settings['base_url']           = 'nginx.internal';  //mysite.com or mysite.com/subdirectory
+$settings['default_controller'] = 'home';       //Set to whatever the default controller name is.
+$settings['php_debug']          = false;        //Set this to true during installation and development.
+$settings['view_debug']         = false;         //WARNING DO NOT SET TO TRUE IN PRODUCTION ENVIORNMENT.
+$settings['sql_debug']          = false;        //This either...

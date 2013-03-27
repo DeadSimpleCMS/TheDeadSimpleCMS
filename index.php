@@ -59,11 +59,14 @@ use DeadSimpleCMS\Core as Boot;
 use DeadSimpleCMS\Factory as Factory;
 use DeadSimpleCMS\Load as Load;
 
-function __autoload($class_name)
+
+function loadSystemClass($class_name)
 {
     $parts = explode('\\', $class_name);
     require_once strtolower(end($parts)) . '.php';
 }
+
+spl_autoload_register('loadSystemClass');
 
 // let's get started
 if (false) //file_exists(PUBLIC_PATH . '/installer'))
@@ -73,5 +76,5 @@ if (false) //file_exists(PUBLIC_PATH . '/installer'))
 else
 {
 
-    $boot = new Core(new Load());
+    include 'core.php';
 }
