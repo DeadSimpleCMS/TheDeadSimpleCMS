@@ -215,10 +215,12 @@ class RequestHandler {
         $localClass     = $class . '_controller';
         if (method_exists($localClass, $method) && $method != '__construct')
         {
+            echo $method;
             return $method;
         }
         else
         {
+            echo $filteredMethod;
             return $filteredMethod;
         }
     }
