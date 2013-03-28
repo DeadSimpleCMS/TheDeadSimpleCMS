@@ -59,6 +59,7 @@ ini_set('display_errors', 1);
 use DeadSimpleCMS\Load as Load;
 
 require_once 'rb.php';
+require_once 'Smarty.class.php';
 
 
 function loadSystemClass($class_name)
@@ -66,14 +67,15 @@ function loadSystemClass($class_name)
     $parts = explode('\\', $class_name);
     if(isset($parts[1]))
     {
-        //echo end($parts) . PHP_EOL;
+
         require_once end($parts) . '.php';
     }
     else
     {
-        echo $parts[0] . PHP_EOL;
-        require_once $parts[0] . '.php';
+
+        require_once $class_name . '.php';
     }
+    var_dump($class_name);
 }
 
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * view.php
+ * View.php
  *
  * Created By monstertke
  * Date: 3/26/13
@@ -24,7 +24,7 @@
  */
 
 namespace DeadSimpleCMS;
-
+use \Smarty;
 
 class View {
 

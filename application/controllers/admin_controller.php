@@ -27,11 +27,12 @@ class Admin_controller extends \DeadSimpleCMS\Controller{
 
     function index()
     {
-        /** @var $m User_Model */
-        $m = $this->load->model('User');
 
         /** @var $n Pages_model */
         $n = $this->load->model('Pages');
+
+        /** @var $m User_Model */
+        $m = $this->load->model('User');
 
         $data = $m->user_info();
         $data['pages'] = $n->getLatestPage(13);

@@ -102,6 +102,7 @@ class Load
             else
             {
                 $class = $file_name . '_Model';
+                echo $file_name;
                 return new $class;
             }
         }
