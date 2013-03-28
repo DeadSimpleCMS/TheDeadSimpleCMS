@@ -1,6 +1,6 @@
 <?php
 /**
- * load.php
+ * Load.php
  *
  * Created By monstertke
  * Date: 3/25/13
@@ -25,7 +25,6 @@
 
 namespace DeadSimpleCMS;
 
-use DeadSimpleCMS\Load as Load;
 use DeadSimpleCMS\View as View;
 
 class Load
@@ -34,7 +33,7 @@ class Load
 
     function __construct()
     {
-        echo __CLASS__ . ' loaded ';
+
     }
 
     public static function getInstance()
@@ -91,7 +90,7 @@ class Load
 
     function model($file_name, $data = null)
     {
-        $file = $file_name . "model.php";
+        $file = $file_name . "_Model.php";
         $path = ROOT_PATH . '/application/models/';
         try
         {
@@ -102,10 +101,8 @@ class Load
             }
             else
             {
-
-                $class = $file_name . 'Model';
+                $class = $file_name . '_Model';
                 return new $class;
-
             }
         }
         catch (Exception $e)

@@ -1,6 +1,6 @@
 <?php
 /**
- * usermodel.php
+ * User_Model.php
  *
  * Created By monstertke
  * Date: 3/26/13
@@ -22,9 +22,9 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
  * SOFTWARE.
  */
-namespace DeadSimpleCMS;
+use DeadSimpleCMS\Model;
 
-class UserModel extends Model{
+class User_Model extends Model{
 
     public function user_info()
     {

@@ -58,23 +58,27 @@ ini_set('display_errors', 1);
 
 use DeadSimpleCMS\Load as Load;
 
+require_once 'rb.php';
 
-function loadLibraryClass()
-{
-    require_once 'rb.php';
-}
 
 function loadSystemClass($class_name)
 {
     $parts = explode('\\', $class_name);
-    require_once strtolower(end($parts)) . '.php';
-
-    //TODO: Remove this var dump
-    var_dump($parts);
+    if(isset($parts[1]))
+    {
+        //echo end($parts) . PHP_EOL;
+        require_once end($parts) . '.php';
+    }
+    else
+    {
+        echo $parts[0] . PHP_EOL;
+        require_once $parts[0] . '.php';
+    }
 }
 
-spl_autoload_register('loadLibraryClass');
+
 spl_autoload_register('loadSystemClass');
+
 
 // let's get started
 if (false) //file_exists(PUBLIC_PATH . '/installer'))

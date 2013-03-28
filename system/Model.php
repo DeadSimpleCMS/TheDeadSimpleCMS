@@ -1,6 +1,6 @@
 <?php
 /**
- * model.php
+ * Model.php
  *
  * Created By monstertke
  * Date: 3/26/13

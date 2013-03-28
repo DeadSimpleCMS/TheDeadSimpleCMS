@@ -26,7 +26,7 @@ use DeadSimpleCMS\Core;
 use DeadSimpleCMS\Load;
 
 include 'testIncludes.php';
-require 'load.php';
+require 'Load.php';
 require 'core.php';
 
 class BootTest extends PHPUnit_Framework_TestCase {

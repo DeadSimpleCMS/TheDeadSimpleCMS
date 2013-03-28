@@ -1,6 +1,6 @@
 <?php
 /**
- * controller.php
+ * Controller.php
  *
  * Created By monstertke
  * Date: 3/26/13

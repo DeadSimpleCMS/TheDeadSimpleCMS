@@ -1,6 +1,6 @@
 <?php
 /**
- * database.php
+ * Database.php
  *
  * Created By monstertke
  * Date: 3/26/13

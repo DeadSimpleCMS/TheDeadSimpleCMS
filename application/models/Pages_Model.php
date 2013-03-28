@@ -1,6 +1,6 @@
 <?php
 /**
- * pagesmodel.php
+ * Pages_Model.php
  *
  * Created By monstertke
  * Date: 3/26/13
@@ -22,8 +22,8 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
  * SOFTWARE.
  */
-namespace DeadSimpleCMS;
-class PagesModel extends Model{
+use DeadSimpleCMS\Model;
+class Pages_Model extends Model{
 
     public function getLatestPage($id)
     {
