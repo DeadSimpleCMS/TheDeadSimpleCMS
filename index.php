@@ -31,7 +31,7 @@ unset($paths);
 // Display errors in production mode
 ini_set('display_errors', 1);
 
-// let's get started
+// let's get started TODO:Make sure to change this back.
 if(false)//file_exists(PUBLIC_PATH . '/installer'))
 {
     require_once PUBLIC_PATH . '/installer/index.php';

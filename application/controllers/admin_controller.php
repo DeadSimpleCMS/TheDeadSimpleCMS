@@ -27,7 +27,10 @@ class Admin_controller extends Controller
 
     function index()
     {
+        /** @var $m User_Model */
         $m = $this->load->model('user');
+
+        /** @var $n Pages_Model*/
         $n = $this->load->model('pages');
 
         $data = $m->user_info();

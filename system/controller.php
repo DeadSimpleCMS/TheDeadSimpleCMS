@@ -27,6 +27,7 @@
 class Controller
 {
     public $config;
+    /** @var Load */
     public $load;
 
    function __construct()
