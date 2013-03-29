@@ -1,8 +1,5 @@
-
-<h1> Hello from my fake ass view </h1>
-<h2> Hello from my fake ass view </h2>
-<h3> Hello from my fake ass view </h3>
-<h4> Hello from my fake ass view </h4>
-<h5> Hello from my fake ass view </h5>
-<h6> Hello from my fake ass view </h6>
-<p>{$data['first']} {$data['last']}</p>
+<div class="container">
+    <div class="pageContent">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis inventore labore libero magnam minima, molestiae optio sapiente unde vero voluptate! Cum ex modi nam natus nisi voluptatem voluptatum. Asperiores, assumenda at debitis dolore excepturi fuga ipsa ipsam iusto magnam maiores nam odio pariatur placeat possimus quae quam quidem sequi, tempora vero voluptatibus? Ab alias, beatae facere fugit nihil nisi qui rem tempore vel voluptate. Asperiores beatae consectetur dolor dolore ex fugit magnam necessitatibus nostrum, rem tempore temporibus ullam, veritatis voluptatum? Assumenda blanditiis eveniet laborum modi nesciunt quaerat recusandae voluptatem. Ab aliquid expedita fuga hic nostrum officiis quaerat sapiente sed sit!</p>
+    </div>
+</div>

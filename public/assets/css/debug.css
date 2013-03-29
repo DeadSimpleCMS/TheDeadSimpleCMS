@@ -1,0 +1,19 @@
+html,
+body {
+  height: 100%;
+}
+.debug-container {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.debug-formatted {
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: steelblue;
+  background-color: lightgrey;
+  color: graytext;
+  padding: 5px;
+}

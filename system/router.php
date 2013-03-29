@@ -49,8 +49,6 @@ class Router
         $this->_class   = $this->request['class'];
         $this->_method  = $this->request['method'];
         $this->_params  = $this->request['params'];
-        var_dump($this->request);
-
         $this->callRoute();
     }
 //TODO: FILTER THE PARAMETERS

@@ -206,3 +206,46 @@ pre {
   color: graytext;
   margin: 0px;
 }
+html,
+body {
+  height: 100%;
+}
+.debug-container {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.debug-formatted {
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: steelblue;
+  background-color: lightgrey;
+  color: graytext;
+  padding: 5px;
+}
+.container {
+  padding: 8px;
+  overflow: auto;
+}
+.full {
+  width: 100%;
+}
+.left {
+  float: left;
+  margin-left: 5px;
+}
+.right {
+  float: right;
+  margin-right: 5px;
+}
+.header {
+  font-color: red;
+  padding: 5px;
+}
+.pageContent {
+  padding: inherit;
+  background-color: red;
+  width: auto;
+}
