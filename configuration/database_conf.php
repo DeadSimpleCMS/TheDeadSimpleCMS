@@ -39,3 +39,5 @@ $database['schema']     = 'public';             // Usually 'public';
 //$database['database']   = $GLOBALS['sitePath'] . '/database/deadsimple.txt'; //Do not alter $GLOBALS['sitePath']
 //$database['username']   = 'laravel';            // DB Engine Username
 //$database['password']   = 'secure99';           // DB Engine Password
+
+return $database;

@@ -30,13 +30,14 @@ class Admin_controller extends Controller
         /** @var $m User_Model */
         $m = $this->load->model('user');
 
-        /** @var $n Pages_Model*/
+        /** @var $n Pages_Model */
         $n = $this->load->model('pages');
 
-        $data = $m->user_info();
-        $data['pages'] = $n->getLatestPage(13);
+        $data['userInfo']   = $m->user_info();
+        $data['pages']      = $n->getLatestPage(13);
         $data['page_title'] = 'Administration';
-        $data['css_file'] = '/public/assets/css/admin.css';
+        $data['css_file']   = '/public/assets/css/admin.css';
+        $data['arrayTest']  = array('derp', 'herp', 'burp');
 
         $this->load->view('base/header', $data);
         $this->load->view('admin_index', $data);

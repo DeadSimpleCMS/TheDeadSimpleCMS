@@ -1,10 +1,10 @@
 <?php
 /**
- * settings_conf.php
+ * debug.php
  *
  * Created By monstertke
- * Date: 3/16/13
- * Time: 12:19 PM
+ * Date: 3/31/13
+ * Time: 4:36 PM
  *
  * Copyright (c) 2013 monstertke
  *
@@ -23,10 +23,6 @@
  * SOFTWARE.
  */
 
-$settings['base_url']           = 'nginx.internal';  //mysite.com or mysite.com/subdirectory
-$settings['default_controller'] = 'home';       //Set to whatever the default controller name is.
-$settings['php_debug']          = false;        //Set this to true during installation and development.
-$settings['view_debug']         = false;         //WARNING DO NOT SET TO TRUE IN PRODUCTION ENVIORNMENT.
-$settings['sql_debug']          = false;        //This either...
-$settings['debug_output']       = false;
-return $settings;
+class Debug {
+
+}
