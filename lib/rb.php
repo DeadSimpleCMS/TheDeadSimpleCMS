@@ -6601,6 +6601,8 @@ class RedBean_Logger_Default implements RedBean_Logger {
       foreach (func_get_args() as $argument) {
         if (is_array($argument)) echo print_r($argument,true); else echo $argument;
 		echo "<br>\n";
+          //TODO: Implement something here.
+          View::debugLog($argument);
       }
     }
   }

@@ -45,6 +45,11 @@ class View
         {
             $this->smarty->debugging = true;
         }
+        if($this->settings['debug_output'])
+        {
+            $this->smarty->assign('settings', $this->settings);
+        }
+
     }
 
     function returnSmarty()
@@ -55,5 +60,10 @@ class View
     function loadTemplate($template = null)
     {
         $this->smarty->display($template);
+    }
+
+    function debugLog($log = null)
+    {
+        var_dump($log);
     }
 }

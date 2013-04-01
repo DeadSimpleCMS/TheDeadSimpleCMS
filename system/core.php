@@ -34,7 +34,6 @@ require 'validator.php';
 
 require 'Smarty.class.php';
 require 'view.php';
-
 require 'controller.php';
 
 $route = new RequestHandler($_SERVER['REQUEST_METHOD'], $_SERVER["REQUEST_URI"]);

@@ -27,12 +27,15 @@
 class Controller
 {
     public $config;
-    /** @var Load */
+    /** @var  Load */
     public $load;
+
+    private $settings;
 
    function __construct()
    {
-        $this->load = Load::getInstance();
+       $this->load = Load::getInstance();
+       $this->settings = $this->load->config('settings');
    }
 
 }

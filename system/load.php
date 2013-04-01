@@ -4,6 +4,7 @@
 class Load {
 
     private static $instance;
+    public $smartyInstance;
 
     public static function getInstance()
     {
@@ -25,7 +26,7 @@ class Load {
     function view( $file_name, $data = null )
     {
         $view = new View();
-        $smarty = $view->returnSmarty();
+        $this->smartyInstance = $smarty = $view->returnSmarty();
 
         $template = $file_name . '.tpl';
         $smarty->assign('data', $data);
@@ -81,6 +82,11 @@ class Load {
             echo $e;
             echo $path . '/models/' . $file;
         }
+    }
+
+    function returnSmarty()
+    {
+        return $this->smartyInstance;
     }
 }
 
